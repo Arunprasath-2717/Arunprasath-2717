@@ -1,216 +1,189 @@
 
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=260&color=0:020407,45:0A1923,75:123B4A,100:00C8E0&text=ARUN%20PRASATH&fontColor=F0F9FF&fontSize=58&fontAlignY=38&desc=ENGINEERING%20INTELLIGENCE.%20BUILDING%20SYSTEMS.&descSize=13&descAlignY=57&animation=fadeIn" alt="Arun Prasath"/>
+# ARUN PRASATH
+
+### MLOps · AI/ML · Cloud Engineering
+
+**Building intelligent systems. Engineering reliable delivery.**
 
 <br/>
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&duration=2800&pause=800&color=00D9F5&center=true&vCenter=true&width=720&lines=MLOps+%2F+AI+INFRASTRUCTURE;CLOUD+%2F+DEVOPS+ENGINEERING;BACKEND+SYSTEMS+%2F+AUTOMATION;FROM+MODEL+TO+PRODUCTION" alt="Engineering specializations"/>
+[![Portfolio](https://img.shields.io/badge/PORTFOLIO-00C8D7?style=for-the-badge&logo=vercel&logoColor=black)](https://arunprasath.me)
+[![GitHub](https://img.shields.io/badge/GITHUB-161B22?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Arunprasath-2717)
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arun-prasath-p-6ar01333/)
 
-<br/><br/>
+<br/>
 
-<a href="https://www.arunprasath.me/"><img src="https://img.shields.io/badge/PORTFOLIO-00C8E0?style=for-the-badge&logo=vercel&logoColor=020407" alt="Portfolio"/></a>
-<a href="https://github.com/Arunprasath-2717"><img src="https://img.shields.io/badge/SOURCE_CODE-111820?style=for-the-badge&logo=github&logoColor=FFFFFF" alt="GitHub"/></a>
-<a href="https://www.linkedin.com/in/arun-prasath-p-6ar01333/"><img src="https://img.shields.io/badge/CONNECT-123B4A?style=for-the-badge&logo=linkedin&logoColor=FFFFFF" alt="LinkedIn"/></a>
-
-<br/><br/>
-
-<img src="https://komarev.com/ghpvc/?username=Arunprasath-2717&style=flat-square&color=00C8E0&label=PROFILE+VIEWS" alt="Profile views"/>
+![Profile Views](https://komarev.com/ghpvc/?username=Arunprasath-2717&style=flat-square&color=00C8D7&label=PROFILE+VIEWS)
 
 </div>
 
 ---
 
-<div align="center">
+## 01 / PROFILE
 
-### `01 / THE ENGINEERING MINDSET`
+I'm a Computer Science and Engineering student interested in the intersection of **machine learning, infrastructure, and software engineering**.
 
-**I build software. I explore intelligence. I engineer for production.**
+My primary focus is MLOps: understanding how ML workflows move from experimentation to deployment through reproducibility, automation, and reliable infrastructure.
 
-</div>
+- **MLOps** — ML lifecycle automation, model deployment, and reproducible workflows.
+- **AI/ML** — Applied machine learning, computer vision, and intelligent applications.
+- **Cloud & DevOps** — Containers, CI/CD, infrastructure as code, and deployment automation.
+- **Backend Engineering** — APIs, data systems, and maintainable application architecture.
 
-Computer Science and Engineering student focused on **MLOps, AI infrastructure, cloud engineering, and backend systems**.
-
-Interested in the engineering that transforms experimental ideas into reliable software: reproducible pipelines, automated delivery, scalable APIs, and observable systems.
-
-```text
-01   MACHINE LEARNING     →  Train. Evaluate. Deploy.
-02   MLOps                →  Version. Automate. Monitor.
-03   CLOUD ENGINEERING    →  Provision. Scale. Observe.
-04   SOFTWARE ENGINEERING →  Design. Build. Ship.
-```
+> The objective is not just to make a model work. It is to engineer the system around it.
 
 ---
 
+## 02 / TECHNOLOGY
+
 <div align="center">
-
-### `02 / THE TECHNOLOGY`
-
-*Tools selected to build, automate, and operate software.*
-
-</div>
 
 **LANGUAGES**
 
-<img src="https://skillicons.dev/icons?i=python,java,cpp,c,js,ts&theme=dark" alt="Languages"/>
+![Python](https://img.shields.io/badge/Python-161B22?style=flat-square&logo=python&logoColor=3776AB)
+![Java](https://img.shields.io/badge/Java-161B22?style=flat-square&logo=openjdk&logoColor=ED8B00)
+![C++](https://img.shields.io/badge/C%2B%2B-161B22?style=flat-square&logo=cplusplus&logoColor=00599C)
+![JavaScript](https://img.shields.io/badge/JavaScript-161B22?style=flat-square&logo=javascript&logoColor=F7DF1E)
+![TypeScript](https://img.shields.io/badge/TypeScript-161B22?style=flat-square&logo=typescript&logoColor=3178C6)
 
-**AI / MACHINE LEARNING**
+**AI / ML**
 
-<img src="https://skillicons.dev/icons?i=pytorch,opencv,sklearn&theme=dark" alt="AI and ML"/>
-<img src="https://img.shields.io/badge/Hugging%20Face-TRANSFORMERS-FFD21E?style=flat-square&logo=huggingface&logoColor=111111" alt="Hugging Face"/>
+![PyTorch](https://img.shields.io/badge/PyTorch-161B22?style=flat-square&logo=pytorch&logoColor=EE4C2C)
+![OpenCV](https://img.shields.io/badge/OpenCV-161B22?style=flat-square&logo=opencv&logoColor=5C3EE8)
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-161B22?style=flat-square&logo=scikitlearn&logoColor=F7931E)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-161B22?style=flat-square&logo=huggingface&logoColor=FFD21E)
 
-**BACKEND / DATA**
+**BACKEND & DATA**
 
-<img src="https://skillicons.dev/icons?i=fastapi,flask,nodejs,mysql,postgres,mongodb,redis&theme=dark" alt="Backend and databases"/>
+![FastAPI](https://img.shields.io/badge/FastAPI-161B22?style=flat-square&logo=fastapi&logoColor=009688)
+![Flask](https://img.shields.io/badge/Flask-161B22?style=flat-square&logo=flask&logoColor=FFFFFF)
+![React](https://img.shields.io/badge/React-161B22?style=flat-square&logo=react&logoColor=61DAFB)
+![MySQL](https://img.shields.io/badge/MySQL-161B22?style=flat-square&logo=mysql&logoColor=4479A1)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-161B22?style=flat-square&logo=postgresql&logoColor=4169E1)
+![MongoDB](https://img.shields.io/badge/MongoDB-161B22?style=flat-square&logo=mongodb&logoColor=47A248)
 
-**CLOUD / DEVOPS / MLOPS**
+**CLOUD & DEVOPS**
 
-<img src="https://skillicons.dev/icons?i=docker,kubernetes,jenkins,terraform,aws,linux,git,github&theme=dark" alt="Cloud and DevOps"/>
-
-**FRONTEND / DELIVERY**
-
-<img src="https://skillicons.dev/icons?i=react,vite,tailwind,html,css,vercel&theme=dark" alt="Frontend and deployment"/>
-
----
-
-<div align="center">
-
-### `03 / SELECTED SYSTEMS`
-
-*Engineering projects at the intersection of intelligence and software.*
+![Docker](https://img.shields.io/badge/Docker-161B22?style=flat-square&logo=docker&logoColor=2496ED)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-161B22?style=flat-square&logo=kubernetes&logoColor=326CE5)
+![Jenkins](https://img.shields.io/badge/Jenkins-161B22?style=flat-square&logo=jenkins&logoColor=D24939)
+![Terraform](https://img.shields.io/badge/Terraform-161B22?style=flat-square&logo=terraform&logoColor=844FBA)
+![AWS](https://img.shields.io/badge/AWS-161B22?style=flat-square&logo=amazonwebservices&logoColor=FF9900)
+![Linux](https://img.shields.io/badge/Linux-161B22?style=flat-square&logo=linux&logoColor=FCC624)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-161B22?style=flat-square&logo=githubactions&logoColor=2088FF)
 
 </div>
 
+---
+
+## 03 / SELECTED PROJECTS
+
 <details>
-<summary><strong>01 — VOILORACLE / NEWS INTELLIGENCE</strong></summary>
+<summary><strong>VOILORACLE — Global News Intelligence</strong></summary>
 
-An AI-driven news intelligence platform exploring multi-source ingestion, NLP analysis, entity extraction, and event correlation.
+An AI-powered news intelligence project focused on transforming multi-source news into structured, searchable insights.
 
-**Architecture**
+**Engineering interests**
 
-`Data Ingestion` → `Processing` → `NLP Analysis` → `Event Intelligence` → `Dashboard`
-
-- Multi-source news aggregation.
+- News ingestion and processing pipelines.
 - NLP-based sentiment and entity analysis.
-- Event clustering and trend discovery.
-- Backend API and dashboard integration.
+- Event correlation and trend discovery.
+- Backend services and data visualization.
 
-**Repository:** [VOILORACLE](https://github.com/Arunprasath-2717/VOILORACLE)
+**Repository:** [Explore VOILORACLE](https://github.com/Arunprasath-2717/VOILORACLE)
 
-**Live:** [veiloracle.vercel.app](https://veiloracle.vercel.app/)
+**Deployment:** [Open the application](https://veiloracle.vercel.app/)
 
 </details>
 
 <details>
-<summary><strong>02 — PORTFOLIO / DIGITAL ENGINEERING SPACE</strong></summary>
+<summary><strong>Projexa — Software Project</strong></summary>
 
-A personal website showcasing engineering work, technical interests, and projects through a modern web interface.
+A project in my public GitHub portfolio.
 
-- React and TypeScript.
-- Vite-based development workflow.
-- Motion and interaction design.
-- Web deployment through Vercel.
+**Repository:** [Explore Projexa](https://github.com/Arunprasath-2717/Projexa)
 
-**Repository:** [Portfolio](https://github.com/Arunprasath-2717/Portfolio)
+</details>
 
-**Live:** [arunprasath.me](https://www.arunprasath.me/)
+<details>
+<summary><strong>Portfolio — Personal Website</strong></summary>
+
+My personal website for presenting engineering projects, technical interests, and development work.
+
+**Repository:** [Explore Portfolio](https://github.com/Arunprasath-2717/Portfolio)
+
+**Live:** [arunprasath.me](https://arunprasath.me)
 
 </details>
 
 ---
 
-<div align="center">
+## 04 / MLOps ENGINEERING
 
-### `04 / THE MLOPS LIFECYCLE`
-
-**A model is only the beginning. Reliable delivery is the engineering.**
-
-</div>
+The lifecycle I am focused on understanding and engineering:
 
 ```text
-┌──────────────────────────────────────────────┐
-│                  DATA LAYER                  │
-│             Validate / Transform             │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────────────────────────────┐
-│              EXPERIMENTATION                 │
-│             Train / Evaluate                 │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────────────────────────────┐
-│             MODEL MANAGEMENT                 │
-│              Version / Track                 │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────────────────────────────┐
-│               DEPLOYMENT                     │
-│             Package / Serve                  │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────────────────────────────┐
-│              OBSERVABILITY                   │
-│             Monitor / Improve                │
-└──────────────────────────────────────────────┘
+DATA
+  │
+  ▼
+VALIDATION & PREPROCESSING
+  │
+  ▼
+MODEL TRAINING & EVALUATION
+  │
+  ▼
+EXPERIMENT TRACKING & VERSIONING
+  │
+  ▼
+CONTAINERIZATION & DEPLOYMENT
+  │
+  ▼
+CI/CD & AUTOMATION
+  │
+  ▼
+MONITORING & CONTINUOUS IMPROVEMENT
 ```
 
-Current areas of exploration:
-
-- Reproducible machine learning workflows.
-- Model serving and deployment automation.
-- Docker and Kubernetes.
-- CI/CD and infrastructure as code.
-- Monitoring, drift detection, and model quality.
+The goal: build reproducible ML workflows that can be tested, deployed, monitored, and improved systematically.
 
 ---
 
+## 05 / GITHUB ACTIVITY
+
 <div align="center">
 
-### `05 / GITHUB TELEMETRY`
-
-*Code is the artifact. Consistency is the signal.*
-
-<br/>
-
-<img width="49%" src="https://github-readme-stats.vercel.app/api?username=Arunprasath-2717&show_icons=true&hide_border=true&bg_color=080D12&title_color=00D9F5&icon_color=00C8E0&text_color=D9E2EA" alt="GitHub statistics"/>
-<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Arunprasath-2717&layout=compact&hide_border=true&bg_color=080D12&title_color=00D9F5&text_color=D9E2EA&langs_count=6" alt="Top languages"/>
-
-<br/><br/>
-
-<img width="85%" src="https://github-readme-activity-graph.vercel.app/graph?username=Arunprasath-2717&bg_color=080D12&color=00D9F5&line=00C8E0&point=FFFFFF&area=true&area_color=123B4A&hide_border=true&custom_title=ENGINEERING%20ACTIVITY" alt="Contribution graph"/>
+<img width="48%" src="https://github-readme-stats.vercel.app/api?username=Arunprasath-2717&show_icons=true&hide_border=true&bg_color=0D1117&title_color=00C8D7&icon_color=00C8D7&text_color=C9D1D9" alt="GitHub statistics"/>
+<img width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Arunprasath-2717&layout=compact&hide_border=true&bg_color=0D1117&title_color=00C8D7&text_color=C9D1D9&langs_count=6" alt="Most used languages"/>
 
 </div>
 
 ---
 
-<div align="center">
-
-### `06 / ACTIVE DIRECTIVES`
-
-</div>
+## 06 / CURRENT FOCUS
 
 ```yaml
-primary_domain: MLOps
+primary: MLOps
 
-engineering:
+exploring:
   - ML lifecycle automation
-  - Cloud infrastructure
-  - Containerized deployments
-  - CI/CD engineering
-  - Backend architecture
-  - AI application development
+  - Model serving and versioning
+  - Docker and Kubernetes
+  - CI/CD pipelines
+  - Infrastructure as Code
+  - Cloud-native architecture
 
-principles:
+engineering_principles:
   - Reproducibility
   - Automation
   - Observability
   - Reliability
-  - Continuous improvement
 
 open_to:
   - Software engineering opportunities
-  - MLOps and AI/ML collaboration
-  - Cloud and DevOps projects
+  - AI/ML and MLOps projects
+  - Cloud and DevOps collaboration
   - Open-source contributions
 ```
 
@@ -218,22 +191,18 @@ open_to:
 
 <div align="center">
 
-### `07 / ESTABLISH CONNECTION`
+## LET'S CONNECT
 
-**Good engineering begins with good problems.**
+**Interested in building reliable software and production-oriented AI systems?**
+
+[![Portfolio](https://img.shields.io/badge/WEBSITE-arunprasath.me-00C8D7?style=for-the-badge&logo=vercel&logoColor=black)](https://arunprasath.me)
+
+[![LinkedIn](https://img.shields.io/badge/CONNECT_ON_LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arun-prasath-p-6ar01333/)
+
+[![GitHub](https://img.shields.io/badge/EXPLORE_MY_CODE-161B22?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Arunprasath-2717)
 
 <br/>
 
-<a href="https://www.arunprasath.me/"><img src="https://img.shields.io/badge/01__PORTFOLIO-00C8E0?style=for-the-badge&logo=vercel&logoColor=020407" alt="Portfolio"/></a>
-
-<a href="https://www.linkedin.com/in/arun-prasath-p-6ar01333/"><img src="https://img.shields.io/badge/02__LINKEDIN-123B4A?style=for-the-badge&logo=linkedin&logoColor=FFFFFF" alt="LinkedIn"/></a>
-
-<a href="https://github.com/Arunprasath-2717"><img src="https://img.shields.io/badge/03__GITHUB-111820?style=for-the-badge&logo=github&logoColor=FFFFFF" alt="GitHub"/></a>
-
-<br/><br/>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=150&section=footer&color=0:00C8E0,35:123B4A,75:071018,100:020407" alt="Cinematic cyan footer"/>
-
-<sub>DESIGNED AROUND SYSTEMS · BUILT THROUGH ITERATION · DRIVEN BY CURIOSITY</sub>
+*Engineer the pipeline. Automate the process. Make the system reliable.*
 
 </div>
