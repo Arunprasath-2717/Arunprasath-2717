@@ -4,6 +4,7 @@ from unittest.mock import patch
 from io import BytesIO
 import build_profile as p
 import cinema
+import realm
 
 class ProfileTests(unittest.TestCase):
     def test_calendar_aggregation(self):
@@ -21,9 +22,9 @@ class ProfileTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d, patch.object(cinema,'OUT',pathlib.Path(d)):
             for theme in cinema.THEMES:
                 for i,project in enumerate(profile['projects'],1): cinema.project(theme,project,i)
-                cinema.toolkit(theme);cinema.focus(theme);cinema.activity(theme,data)
+                realm.toolkit(theme);realm.focus(theme);realm.lifecycle(theme);cinema.activity(theme,data)
             files=list(pathlib.Path(d).glob('*.svg'))
-            self.assertEqual(len(files),12)
+            self.assertEqual(len(files),14)
             for f in files:
                 s=f.read_text();root=ET.fromstring(s)
                 self.assertEqual(root.attrib['role'],'img')
@@ -36,7 +37,7 @@ class ProfileTests(unittest.TestCase):
     def test_readme_assets(self):
         md=(p.ROOT/'README.md').read_text()
         refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
-        self.assertEqual(len(refs),16)
+        self.assertEqual(len(refs),17)
         for f in refs:
             if f.endswith('.svg') and ('snake-' not in f or (p.ROOT/f).exists()): ET.parse(p.ROOT/f)
             elif 'hero' in f: self.assertTrue((p.ROOT/f).exists())
@@ -60,8 +61,20 @@ class ProfileTests(unittest.TestCase):
         self.assertIn(b'ANIM',motion)
         self.assertGreaterEqual(motion.count(b'ANMF'),36)
         self.assertLess(len(motion),600000)
+    def test_ruins_hero(self):
+        import base64
+        hero=(p.ASSETS/'ruins-hero.svg').read_text()
+        root=ET.fromstring(hero)
+        self.assertEqual(root.attrib['viewBox'],'0 0 1600 640')
+        self.assertIn('prefers-reduced-motion',hero)
+        self.assertIn('@keyframes camera',hero)
+        self.assertIn('@keyframes fall',hero)
+        image=root.find('.//{http://www.w3.org/2000/svg}image')
+        data=image.attrib['{http://www.w3.org/1999/xlink}href']
+        self.assertEqual(base64.b64decode(data.split(',',1)[1]),(p.ASSETS/'ruins-landscape.webp').read_bytes())
+        self.assertLess(len(hero.encode()),1000000)
     def test_motion(self):
-        for name in ('verifai','atlox','cane','toolchain','focus'):
+        for name in ('verifai','atlox','cane','toolchain','focus','lifecycle'):
             s=(p.ASSETS/f'{name}-dark.svg').read_text()
             self.assertIn('@keyframes',s)
             self.assertIn('animation:',s)

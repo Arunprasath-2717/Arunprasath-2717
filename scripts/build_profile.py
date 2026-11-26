@@ -37,10 +37,11 @@ def main():
     else: data=json.loads(source.read_text())
     validate(data);ASSETS.mkdir(exist_ok=True)
     import cinema
+    import realm
     cinema.OUT=ASSETS
     for theme in THEMES:
         for i,p in enumerate(profile['projects'],1): cinema.project(theme,p,i)
-        cinema.toolkit(theme);cinema.focus(theme);cinema.activity(theme,data)
+        realm.toolkit(theme);realm.focus(theme);realm.lifecycle(theme);cinema.activity(theme,data)
     if a.live: source.write_text(json.dumps(data,indent=2)+'\n')
-    print('Generated 12 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
+    print('Generated 14 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
 if __name__=='__main__':main()

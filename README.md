@@ -1,10 +1,7 @@
 <!-- AP/2717 • Cinematic motion and locally generated SVG modules. -->
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-still.jpg">
-  <img src="assets/hero-motion.webp" width="100%" alt="Arun Prasath — cinematic cloud command center. Backend Engineering, Applied AI and MLOps.">
-</picture>
+<img src="assets/ruins-hero.svg" width="100%" alt="Arun Prasath — backend engineering, applied AI and MLOps, against cinematic floating mountains and ancient ruins.">
 
-<sub>[Play animation](assets/hero-motion.webp) · [GIF fallback](assets/hero.gif) · [Still image](assets/hero-still.jpg)</sub>
+<sub>[View cinematic hero](assets/ruins-hero.svg) · [Still landscape](assets/ruins-landscape.webp)</sub>
 
 [Portfolio](https://arunprasath.me) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/) · [LeetCode](https://leetcode.com/u/_Arun_Prasath_07_/) · [Email](mailto:arunprasath6035@gmail.com)
 
@@ -47,7 +44,7 @@ My next frontier is MLOps — reproducible training, model versioning, container
 
 [Source](https://github.com/Arunprasath-2717/CANE) · [Case study](https://arunprasath.me/work/cane)
 
-## 02 — Engineering toolchain
+## 02 — Engineering constellation
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/toolchain-dark.svg">
@@ -61,7 +58,14 @@ My next frontier is MLOps — reproducible training, model versioning, container
   <img src="assets/focus-light.svg" width="100%" alt="Reliable backends, applied intelligence and ML infrastructure. Current study: Kubernetes, Terraform, AWS, model serving and observability.">
 </picture>
 
-## 04 — Contribution activity
+## 04 — MLOps lifecycle
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/lifecycle-dark.svg">
+  <img src="assets/lifecycle-light.svg" width="100%" alt="MLOps learning roadmap: ingest, train, evaluate, serve, observe and improve through a feedback loop.">
+</picture>
+
+## 05 — Contribution activity
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
@@ -73,7 +77,7 @@ My next frontier is MLOps — reproducible training, model versioning, container
   <img src="assets/snake-light.svg" width="100%" alt="Animated snake moving through my actual green GitHub contribution calendar.">
 </picture>
 
-<sub>Contribution data refreshes every six hours. <a href="data/contributions.json">Weekly data</a> · <a href="https://github.com/Platane/snk">Contribution snake generator</a>. The cinematic hero and project animations are illustrative.</sub>
+<sub>Contribution data refreshes every six hours. <a href="data/contributions.json">Weekly data</a> · <a href="https://github.com/Platane/snk">Contribution snake generator</a>. The cinematic artwork and system motion are illustrative; the contribution calendar uses GitHub data.</sub>
 
 ---
 
