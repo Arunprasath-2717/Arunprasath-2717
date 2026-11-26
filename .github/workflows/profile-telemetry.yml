@@ -1,4 +1,5 @@
-name: AP 2717 / telemetry refresh
+name: Refresh profile artwork
+
 on:
   schedule:
     - cron: '17 */6 * * *'
@@ -6,35 +7,52 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scripts/render_profile.py'
-      - 'scripts/forge.py'
-      - 'scripts/test_*.py'
+      - 'scripts/**'
       - '.github/workflows/profile-telemetry.yml'
+      - 'README.md'
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/profile-telemetry.yml'
+      - 'README.md'
+      - 'assets/workshop.svg'
+
 permissions:
-  contents: write
+  contents: read
+
 concurrency:
-  group: profile-telemetry
+  group: profile-artwork-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
   cancel-in-progress: false
+
 jobs:
-  render:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Test SVG renderer and repository layout
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+
+  refresh:
+    needs: validate
+    if: github.event_name != 'pull_request'
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Checkout profile
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: main
-      - name: Generate from GitHub API
+      - name: Fetch contribution data and render
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/forge.py --live
-      - name: Test renderer
-        run: python3 -m unittest discover -s scripts -p 'test_*.py'
-      - name: Commit generated assets if changed
+        run: python3 scripts/build_profile.py --live
+      - name: Publish changed artwork
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/forge.svg
+          git add assets/workshop.svg
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'chore(profile): refresh GitHub telemetry'
+          git commit -m 'chore(profile): refresh contribution tape'
           git push origin HEAD:main
