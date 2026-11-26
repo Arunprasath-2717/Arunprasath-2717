@@ -2,7 +2,7 @@
 from pathlib import Path
 import html, math, xml.etree.ElementTree as ET
 OUT=Path(__file__).resolve().parents[1]/'assets'
-THEMES={'dark':dict(bg='#1c2024',fg='#f3f1eb',dim='#bcc1c2',rule='#42484a',accent='#bfd5c7',ink='#24312a',gold='#d7b477',quiet='#34433a'), 'light':dict(bg='#f4f3ef',fg='#252b2d',dim='#515c60',rule='#c9cdca',accent='#286440',ink='#e4ebe3',gold='#805421',quiet='#d1dfd2')}
+THEMES={'dark':dict(bg='#1b1d21',fg='#f3f1eb',dim='#bcc1c2',rule='#42484a',accent='#ffc3a2',ink='#24312a',gold='#d7b477',quiet='#34433a'), 'light':dict(bg='#f4f3ef',fg='#252b2d',dim='#515c60',rule='#c9cdca',accent='#286440',ink='#e4ebe3',gold='#805421',quiet='#d1dfd2')}
 SANS='Arial, Helvetica, sans-serif'; SERIF='Georgia, Times New Roman, serif'; MONO='Consolas, Liberation Mono, monospace'
 def e(s):return html.escape(str(s),quote=True)
 def t(x,y,s,size,c,anchor='start',font=SANS,weight=400,extra=''):

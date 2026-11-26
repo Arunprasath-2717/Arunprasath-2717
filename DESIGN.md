@@ -1,14 +1,10 @@
-# Signal Foundry design system
+# Spectrum — profile design
 
-## Intent
-An engineer's identity expressed through a machined silicon substrate. The artwork supports the content rather than competing with it.
+The visual language is bright coral, apricot, citrus and mint on neutral ink, with soft color falloff rather than solid accent backgrounds. GitHub's original green contribution snake remains unchanged.
 
-- Palette: graphite, warm ivory, muted champagne and neutral platinum. The real GitHub snake retains its authentic contribution greens.
-- Hierarchy: large readable name, explicit role, selected work, concise skill index, actual development activity.
-- Motion: fixed geometry with local travelling highlights; no camera zoom, artificial loading indicators or fake uptime.
-- Content: three documented projects. Illustrative examples must be labeled, and measured counts must retain their source.
-- Accessibility: SVG titles and descriptions, meaningful link alt text, reduced-motion CSS, native Markdown for the biography and learning goals.
-- Performance: no remote artwork dependencies, embedded photographs, runtime JS, or WebGL. Keep each SVG compact.
-- Avoid: scenery unrelated to engineering, repeated decorative diagrams, hard green fills, gratuitous badges and fake telemetry.
+The original folded-spectrum hero is mathematically generated vector art. It is not a borrowed landscape or a 3D hardware illustration. Actual weekly contribution bars occupy their own region. Project cards pair specific engineering decisions with distinct visuals: evidence highlighting, report clustering, and one tile per recorded CANE prediction. Skill labels stay static for readability.
 
-These rules retain the intentionality and restraint of the prior Impeccable/Unslop review, without reproducing either project's design.
+Reference review: https://github.com/PRABHUSIDDARTH/PRABHUSIDDARTH
+We studied its cohesive visual identity, compact project narratives, project-specific animation, skill presentation and scheduled contributions. No code, imagery, ASCII landscape, quest naming or layout assets were copied.
+
+Quality gates: readable static frames, aligned margins, meaningful animation, reduced-motion CSS, local self-contained SVGs, authentic data and explicit example labels. Never publish blank screenshots, invented accuracy, fake live traffic, decorative progress gauges, or unnecessary panels. Use versioned filenames when replacing a visual to avoid stale image caches.

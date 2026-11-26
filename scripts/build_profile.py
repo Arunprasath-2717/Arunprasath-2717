@@ -37,13 +37,10 @@ def main():
     else: data=json.loads(source.read_text())
     validate(data);ASSETS.mkdir(exist_ok=True)
     import cinema
-    import fieldwork
+    import spectrum
     cinema.OUT=ASSETS
-    fieldwork.OUT=ASSETS
-    fieldwork.build()
-    import foundry
-    foundry.OUT=ASSETS
-    foundry.hero(data)
+    spectrum.OUT=ASSETS
+    spectrum.build(data)
     for theme in THEMES:
         cinema.activity(theme,data)
     if a.live: source.write_text(json.dumps(data,indent=2)+'\n')
