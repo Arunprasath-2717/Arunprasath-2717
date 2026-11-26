@@ -1,154 +1,114 @@
-"""Night shift: original SVG artwork and animated editorial modules.
-The scene is fictional; all contribution counts come from GitHub.
-"""
-import html, math, random
+"""AP/2717 field guide: explanatory technical motion, not decorative dashboards."""
 from pathlib import Path
+import html, math, xml.etree.ElementTree as ET
 OUT=Path(__file__).resolve().parents[1]/'assets'
-THEMES={
-'dark':dict(bg='#171b20',fg='#f0f3f1',dim='#b1b9ba',rule='#3d484b',accent='#e3c491',leaf='#70db94',paper='#242c30',black='#171b20'),
-'light':dict(bg='#f6f8f6',fg='#1e2724',dim='#4f6058',rule='#c9d3ce',accent='#865b27',leaf='#19743d',paper='#e7ede9',black='#1e2724')}
-MONO='ui-monospace, SFMono-Regular, Consolas, Liberation Mono, monospace'
-SANS='system-ui, -apple-system, Segoe UI, sans-serif'
-SERIF='Georgia, Times New Roman, serif'
-def e(s): return html.escape(str(s),quote=True)
-def R(x,y,w,h,f,rx=0,extra=''): return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="{f}" {extra}/>'
-def P(d,f,extra=''): return f'<path d="{d}" fill="{f}" {extra}/>'
-def L(d,f,w=1,extra=''): return f'<path d="{d}" fill="none" stroke="{f}" stroke-width="{w}" {extra}/>'
-def C(x,y,r,f,extra=''): return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{f}" {extra}/>'
-def T(x,y,s,size,f,weight=400,anchor='start',font=SANS,extra=''): return f'<text x="{x}" y="{y}" font-size="{size}" fill="{f}" font-weight="{weight}" text-anchor="{anchor}" font-family="{font}" {extra}>{e(s)}</text>'
-def G(body,extra=''):return f'<g {extra}>{body}</g>'
+THEMES={'dark':dict(bg='#171c19',fg='#edf1e9',dim='#bbc6bd',rule='#46574b',accent='#b5d5ac',ink='#24312a',gold='#d7b477',quiet='#34433a'), 'light':dict(bg='#f4f7f3',fg='#1c2b22',dim='#45584b',rule='#afc1b1',accent='#286440',ink='#e4ebe3',gold='#805421',quiet='#d1dfd2')}
+SANS='Arial, Helvetica, sans-serif'; SERIF='Georgia, Times New Roman, serif'; MONO='Consolas, Liberation Mono, monospace'
+def e(s):return html.escape(str(s),quote=True)
+def t(x,y,s,size,c,anchor='start',font=SANS,weight=400,extra=''):
+ return f'<text x="{x}" y="{y}" font-size="{size}" fill="{c}" font-family="{font}" font-weight="{weight}" text-anchor="{anchor}" {extra}>{e(s)}</text>'
+def r(x,y,w,h,c,extra=''):return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{c}" {extra}/>'
+def path(d,c,w=1,extra=''):return f'<path d="{d}" fill="none" stroke="{c}" stroke-width="{w}" {extra}/>'
+def circle(x,y,rad,c,extra=''):return f'<circle cx="{x}" cy="{y}" r="{rad}" fill="{c}" {extra}/>'
+def g(s,extra=''):return f'<g {extra}>{s}</g>'
 def write(name,theme,h,title,desc,body,css=''):
-    c=THEMES[theme]
-    style='<style>'+css+'@media(prefers-reduced-motion:reduce){*{animation:none!important}}</style>'
-    out=f'<svg xmlns="http://www.w3.org/2000/svg" width="960" height="{h}" viewBox="0 0 960 {h}" role="img" aria-labelledby="title desc"><title id="title">{e(title)}</title><desc id="desc">{e(desc)}</desc>{style}{R(0,0,960,h,c["bg"],8)}{body}</svg>\n'
-    (OUT/f'{name}-{theme}.svg').write_text(out,encoding='utf-8')
-
-# Perspective surfaces use solid pigments and offset faces, not filters or external imagery.
-def slab(x,y,w,h,c,d=13):
-    return (P(f'M{x} {y}l{d} {-d}h{w}l{-d} {d}Z',c['rule'])
-            +P(f'M{x+w} {y}l{d} {-d}v{h}l{-d} {d}Z',c['black'])
-            +R(x,y,w,h,c['paper'],3,extra=f'stroke="{c["rule"]}"'))
-def route(d,c,delay=0):
-    return L(d,c['rule'],6,'stroke-linecap="round"')+L(d,c['leaf'],2,f'stroke-linecap="round" stroke-dasharray="4 18" class="travel" style="animation-delay:{delay}s"')
-MOTION='.travel{animation:travel 2s linear infinite}.float{animation:float 4s ease-in-out infinite}.lamp{animation:lamp 3s ease-in-out infinite}.sweep{animation:sweep 4s ease-in-out infinite}@keyframes travel{to{stroke-dashoffset:-44}}@keyframes float{50%{transform:translateY(-7px)}}@keyframes lamp{50%{opacity:.35}}@keyframes sweep{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}'
+ c=THEMES[theme];s=f'<svg xmlns="http://www.w3.org/2000/svg" width="960" height="{h}" viewBox="0 0 960 {h}" role="img" aria-labelledby="title desc"><title id="title">{e(title)}</title><desc id="desc">{e(desc)}</desc><style>{css}@media(prefers-reduced-motion:reduce){{*{{animation:none!important}}.moving{{opacity:0}}}}</style>{r(0,0,960,h,c["bg"])}{body}</svg>\n';ET.fromstring(s);(OUT/f'{name}-{theme}.svg').write_text(s,encoding='utf-8')
+def title(c,head,sub):return t(32,48,head,34,c['fg'],font=SERIF)+t(32,80,sub,17,c['dim'])
 def project(theme,p,index):
-    c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    b=T(28,33,f'0{index} / {p["category"]}',12,ac,700,font=MONO,extra='letter-spacing="1.3"')
-    b+=T(28,91,p['name'],46,fg,750)
-    for i,s in enumerate(p['summary']):b+=T(30,125+i*24,s,15,dim)
-    b+=T(30,215,p['stack'],12,fg,500,font=MONO)
-    b+=T(30,240,'ARCHITECTURE STUDY / 0'+str(index),10,ac,650,font=MONO)
-    # A low stage and two receding planes create a coherent physical space.
-    b+=P('M491 212L615 53H944L927 208L823 252H491Z',c['paper'])
-    b+=P('M491 212H927L823 252H491Z',c['rule'])
-    if p['slug']=='verifai':
-        # Evidence stack feeding a raised review processor and a verdict display.
-        b+=route('M571 154H646V112H693',c)+route('M755 122H805V159H846',c,-.8)
-        for i in range(3):
-            x=518+i*7;y=130-i*11
-            b+=slab(x,y,57,59,c,8)+R(x+8,y+10,38,3,dim,1)+R(x+8,y+19,29,2,c['rule'],1)
-        b+=T(547,213,'CLAIMS',10,fg,700,'middle',MONO)
-        b+=slab(653,84,113,93,c,15)
-        b+=R(664,96,91,63,c['bg'],4)
-        b+=T(709,119,'EVIDENCE',12,gr,700,'middle',MONO)+T(709,136,'+ JUDGES',11,fg,600,'middle',MONO)
-        b+=R(664,101,91,2,gr,extra='class="sweep" opacity=".6"')
-        b+=T(709,192,'REVIEW',10,fg,700,'middle',MONO)
-        for i,(label,col) in enumerate([('SUPPORT',gr),('DISPUTE',ac),('UNKNOWN',dim)]):
-            y=86+i*42
-            b+=slab(814,y,112,30,c,8)+C(825,y+15,3.5,col,extra=f'class="lamp" style="animation-delay:{-i*.7}s"')+T(838,y+19,label,11,col,750,font=MONO)
-    elif p['slug']=='atlox':
-        # Incoming feeds, stacked ingest processor, distinct event cluster outputs.
-        for i,label in enumerate(['RSS','API','FEED']):
-            y=77+i*43
-            b+=route(f'M569 {y+15}H611L645 139',c,-i*.6)
-            b+=slab(507,y,62,28,c,8)+T(538,y+19,label,11,fg,700,'middle',MONO)
-        b+=slab(644,91,101,91,c,16)
-        b+=R(656,104,77,49,c['bg'],4)+T(694.5,124,'NLP',19,gr,750,'middle',MONO)+T(694.5,140,'CLUSTER',9,fg,700,'middle',MONO)
-        for i in range(5):b+=R(657+i*15,163,9,4,gr if i%2 else ac,1,extra=f'class="lamp" style="animation-delay:{-i*.23}s"')
-        for i,(label,num) in enumerate([('EVENTS',5),('ENTITIES',4),('SENTIMENT',6)]):
-            y=73+i*50
-            b+=route(f'M745 136H770V{y+18}H797',c,-i*.7)
-            b+=slab(797,y,129,39,c,8)+T(807,y+14,label,10,fg,750,font=MONO)
-            for j in range(num):
-                b+=R(808+j*17,y+21,13,9,gr if (i+j)%3 else ac,2,extra=f'class="lamp" style="animation-delay:{-j*.21-i*.6}s"')
-    else:
-        # Message slabs arrive at the context engine and follow separate delivery routes.
-        for i,label in enumerate(['Urgent','Routine','Untrusted']):
-            y=83+i*41
-            b+=route(f'M604 {y+14}H628L655 132',c,-i*.5)
-            b+=slab(506,y,98,28,c,8)+T(516,y+19,label,12,fg,600)
-        b+=slab(653,93,104,89,c,15)
-        b+=R(664,103,82,49,c['bg'],4)+T(705,124,'CONTEXT',12,gr,750,'middle',MONO)+T(705,141,'score + rules',10,dim,400,'middle')
-        b+=T(705,167,'ROUTER',10,ac,700,'middle',MONO)
-        for i,(label,col) in enumerate([('NOTIFY',gr),('DIGEST',ac),('MUTE',dim)]):
-            y=73+i*50
-            b+=route(f'M757 135H781V{y+18}H800',c,-i*.7)
-            b+=slab(800,y,125,34,c,8)+C(812,y+17,4,col,extra=f'class="lamp" style="animation-delay:{-i*.7}s"')+T(824,y+21,label,12,col,750,font=MONO)
-    write(p['slug'],theme,274,p['name'],'. '.join(p['summary'])+'. Isometric conceptual system flow, not live traffic.',b,MOTION)
+ c=THEMES[theme];fg,dim,gr,rule,gold=c['fg'],c['dim'],c['accent'],c['rule'],c['gold'];slug=p['slug']
+ if slug=='verifai':
+  # An evidence inspection view, using a clearly marked example rather than invented benchmarks.
+  b=title(c,'Evidence before verdict','Illustrative example from the verification workflow')
+  b+=path('M32 99H928',rule)
+  b+=t(32,133,'Model claim',18,dim)+t(32,164,'“The library is closed on Sunday.”',26,fg,font=SERIF)
+  b+=r(32,179,430,2,rule)+r(32,179,430,2,gr,'class="scan" style="transform-origin:32px 179px"')
+  b+=t(32,220,'Retrieved evidence',18,dim)+t(32,252,'“Sunday hours: 10:00–16:00.”',24,fg,font=SERIF)
+  b+=path('M489 137V256',rule,1)
+  b+=t(531,133,'Independent review',18,dim)
+  b+=t(531,173,'Claim and source disagree',24,fg,weight=600)
+  b+=t(531,210,'Verdict: dispute',30,gold,weight=600)
+  b+=t(531,244,'No evidence → unknown',17,dim)
+  b+=path('M32 280H928',rule)+t(32,307,'Extract claim  →  retrieve sources  →  review  →  keep evidence',17,dim)
+  css='.scan{animation:scan 5s ease-in-out infinite}@keyframes scan{0%,100%{transform:scaleX(.04);opacity:.25}55%,82%{transform:scaleX(1);opacity:1}}'
+  write(slug,theme,326,'VerifAI evidence review','Illustrative claim about a library disagrees with sample retrieved Sunday opening hours; independent review yields dispute.',b,css)
+ elif slug=='atlox':
+  # Text streams become two event clusters. Geometry encodes a real relationship.
+  b=title(c,'Find the event behind the headlines','Illustrative clustering of related news fragments')
+  b+=path('M32 99H928',rule)
+  b+=t(32,126,'Incoming headlines',18,dim)+t(634,126,'Grouped events',18,dim)
+  items=[('City opens new rail line',154,180),('First trains begin service',196,180),('Rain warning issued',238,258),('Heavy rainfall forecast',280,258)]
+  for i,(label,y,target) in enumerate(items):
+   b+=t(32,y,label,21,fg)+path(f'M340 {y-7}C455 {y-7} 480 {target-7} 616 {target-7}',rule,1.5)
+   # Move along the actual corresponding grouping path, not a decorative dot.
+   d=f'M340 {y-7}C455 {y-7} 480 {target-7} 616 {target-7}'
+   b+=f'<circle r="4" fill="{gr}" class="moving" style="offset-path:path(\'{d}\');animation:route 3.2s linear infinite;animation-delay:-{i*.7}s" cx="0" cy="0"/>'
+  b+=path('M634 143V205',gr,3)+t(650,168,'Rail opening',27,fg,weight=600)+t(650,192,'2 matching reports',17,dim)
+  b+=path('M634 223V285',gold,3)+t(650,248,'Weather warning',27,fg,weight=600)+t(650,272,'2 matching reports',17,dim)
+  b+=path('M32 304H928',rule)+t(32,331,'Normalize and deduplicate before NLP and density-based clustering.',17,dim)
+  css='@keyframes route{0%{offset-distance:0%;opacity:0}12%,88%{opacity:1}100%{offset-distance:100%;opacity:0}}'
+  write(slug,theme,350,'Atlox event grouping','Four illustrative headlines converge into two event clusters; moving points depict data grouping.',b,css)
+ else:
+  # Routing decision ledger, a separate form language from the other two.
+  b=title(c,'One message, one explainable decision','Illustrative messages and routing outcomes')
+  b+=path('M32 99H928',rule)
+  for x,s in [(32,'Incoming message'),(394,'Context'),(735,'Action')]:b+=t(x,130,s,17,dim)
+  rows=[('“Build failed”','Urgent work item','Notify',gr),('“Weekly summary”','Routine update','Digest',gold),('“Unsolicited offer”','Low relevance','Mute',dim)]
+  for i,(msg,reason,act,col) in enumerate(rows):
+   y=171+i*64;b+=path(f'M32 {y+24}H928',rule)
+   b+=t(32,y,msg,23,fg)+t(394,y,reason,20,fg)+t(735,y,act,24,col,weight=600)
+   b+=r(32,y+15,7,3,col)+r(40,y+15,160,3,col,f'class="marker" style="animation-delay:-{i*1.6}s;transform-origin:40px {y+15}px"')
+  b+=t(32,358,'Context + historical retrieval + deterministic scoring',17,dim)
+  css='.marker{animation:mark 4.8s ease-in-out infinite}@keyframes mark{0%,100%{transform:scaleX(.03);opacity:.1}33%,60%{transform:scaleX(1);opacity:.8}}'
+  write(slug,theme,378,'CANE routing ledger','Illustrative messages and deterministic routing outcomes; urgent work notifies, routine update digests, low relevance mutes.',b,css)
 
 def toolkit(theme):
-    c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    b=T(28,35,'02 / ENGINEERING TOOLCHAIN',12,ac,700,font=MONO,extra='letter-spacing="1.5"')
-    b+=T(28,82,'From source to serving.',36,fg,700,font=SERIF)
-    b+=P('M28 203L151 105H933L899 202L819 243H28Z',c['paper'])
-    b+=P('M28 203H899L819 243H28Z',c['rule'])
-    stages=[('LINUX','Develop'),('GIT / CI','Test'),('DOCKER','Package'),('CLOUD','Deploy'),('ML','Serve')]
-    for i,(label,sub) in enumerate(stages):
-        x=46+i*181
-        if i<4:b+=route(f'M{x+140} 166H{x+181}',c,-i*.3)
-        b+=slab(x,137,140,59,c,13)
-        b+=T(x+10,153,f'0{i+1}',10,ac,700,font=MONO)
-        b+=T(x+10,176,label,15,fg,750,font=MONO)
-        b+=C(x+125,150,3.5,gr,extra=f'class="lamp" style="animation-delay:{-i*.4}s"')
-        b+=T(x+10,219,sub,12,fg,650)
-    groups=[
-      ('LANGUAGES','Python · Java · TypeScript','JavaScript · C / C++ · SQL'),
-      ('BACKEND','FastAPI · Flask · Node.js','REST APIs · SQLAlchemy · JWT'),
-      ('APPLIED AI','PyTorch · Transformers · spaCy','scikit-learn · BM25 · OpenCV · Evaluation'),
-      ('DATA SYSTEMS','PostgreSQL · PostGIS · Redis','SQLite · MongoDB · Supabase'),
-      ('LINUX & DELIVERY','Linux · Docker · Git · GitHub Actions','CI/CD · Pytest · Ruff · Mypy'),
-      ('WEB ENGINEERING','React · Next.js · Vite','HTML / CSS · WebSockets')]
-    for i,(label,a,d) in enumerate(groups):
-        x=28+(i%2)*460;y=269+(i//2)*93
-        b+=slab(x,y,437,72,c,8)
-        b+=T(x+12,y+20,label,11,ac,750,font=MONO)
-        b+=T(x+12,y+41,a,14,fg,600)
-        b+=T(x+12,y+60,d,13,dim)
-    b+=R(28,557,904,56,c['paper'],5)
-    b+=T(42,577,'CURRENT STUDY / MLOPS',11,ac,750,font=MONO)
-    b+=T(42,598,'Kubernetes · Terraform · AWS · Model registries · Experiment tracking · Observability',14,fg)
-    write('toolchain',theme,631,'Engineering toolchain','Six skill domains and a conceptual five-stage deployment line. Current study: Kubernetes, Terraform, AWS, model registries, experiment tracking and observability.',b,MOTION)
+ c=THEMES[theme];fg,dim,gr,rule=c['fg'],c['dim'],c['accent'],c['rule']
+ b=title(c,'From source to serving','A software delivery sequence I work with and study')
+ # One trace with real labels, no fake telemetry or floating decorative objects.
+ xs=[90,285,480,675,870];labels=[('Linux','Source'),('Git / CI','Tests'),('Docker','Image'),('Cloud','Deploy'),('MLOps','Serve')]
+ b+=path('M90 158H870',rule,3)
+ for x,(a,d) in zip(xs,labels):
+  b+=circle(x,158,10,c['bg'],f'stroke="{gr}" stroke-width="2"')+t(x,127,a,22,fg,'middle',weight=600)+t(x,199,d,19,dim,'middle')
+ b+=g(r(78,145,24,26,gr)+path('M84 154H96M84 159H96M84 164H92',c['bg'],1.5),'class="artifact moving"')
+ b+=t(480,239,'Build and test an artifact before promoting it to the next stage.',17,dim,'middle')
+ css='.artifact{animation:artifact 8s linear infinite}@keyframes artifact{0%{transform:translateX(0);opacity:0}5%,95%{opacity:1}100%{transform:translateX(780px);opacity:0}}'
+ write('toolchain',theme,260,'Source to serving','Illustrative Linux to ML serving delivery sequence. The moving artifact follows five stages.',b,css)
 
 def focus(theme):
-    c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    b=T(28,35,'03 / CURRENT FOCUS',12,ac,700,font=MONO,extra='letter-spacing="1.5"')
-    b+=T(28,80,'The systems I want to master.',35,fg,700,font=SERIF)
-    # Three chapters of one architecture; deliberately no progress percentages.
-    chapters=[('01','Reliable backends','API contracts · persistence','Validation · tests','FastAPI / PostgreSQL'),('02','Applied intelligence','Retrieval · verification','NLP · evaluation','PyTorch / BM25'),('03','ML infrastructure','Reproducible training','Model serving · monitoring','Studying cloud / MLOps')]
-    b+=P('M28 227L159 105H932L910 232L801 275H28Z',c['paper'])
-    b+=P('M28 227H910L801 275H28Z',c['rule'])
-    for i,(num,title,a,d,tools) in enumerate(chapters):
-        x=46+i*300
-        if i<2:b+=route(f'M{x+244} 174H{x+300}',c,-i*.7)
-        b+=slab(x,129,244,88,c,15)
-        b+=T(x+12,148,num,11,ac,750,font=MONO)
-        b+=T(x+12,174,title,19,fg,700)
-        b+=T(x+12,194,a,12,dim)
-        b+=T(x+12,209,d,12,dim)
-        b+=C(x+226,143,4,gr,extra=f'class="lamp" style="animation-delay:{-i*.8}s"')
-        b+=T(x+3,249,tools,11,fg,600,font=MONO)
-    b+=T(28,298,'Learning: Kubernetes · Terraform · AWS · experiment tracking · observability',14,dim)
-    write('focus',theme,319,'Current engineering focus','Reliable backend systems, applied intelligence, and ML infrastructure. Cloud and MLOps topics are learning interests.',b,MOTION)
+ c=THEMES[theme];fg,dim,gr,rule,gold=c['fg'],c['dim'],c['accent'],c['rule'],c['gold']
+ b=title(c,'The path of a request','Conceptual backend and model-serving boundary')
+ b+=t(32,137,'Client',22,fg,weight=600)+t(351,137,'API boundary',22,fg,weight=600)+t(725,137,'Model service',22,fg,weight=600)
+ b+=path('M32 164H928',rule,2)+path('M928 214H32',rule,2)
+ b+=t(32,198,'Request',17,dim)+t(928,250,'Response + trace',17,dim,'end')
+ b+=r(344,153,3,72,gr)+r(712,153,3,72,gr)
+ b+=g(r(32,157,22,14,gr)+path('M37 161H49M37 166H45',c['bg'],1),'class="request moving"')
+ b+=g(r(906,207,22,14,gold)+path('M911 211H923M911 216H919',c['bg'],1),'class="response moving"')
+ b+=t(32,286,'Validate → persist or retrieve → infer → return a traceable result',18,dim)
+ css='.request{animation:request 7s linear infinite}.response{animation:response 7s linear infinite}@keyframes request{0%{transform:translateX(0);opacity:0}5%{opacity:1}43%{transform:translateX(874px);opacity:1}49%,100%{opacity:0;transform:translateX(874px)}}@keyframes response{0%,49%{opacity:0;transform:translateX(0)}53%{opacity:1}95%{opacity:1;transform:translateX(-874px)}100%{opacity:0;transform:translateX(-874px)}}'
+ write('focus',theme,310,'Request lifecycle','A request goes through an API boundary to a model service and returns a response. This is a conceptual architecture.',b,css)
+
+def lifecycle(theme):
+ c=THEMES[theme];fg,dim,gr,rule,gold=c['fg'],c['dim'],c['accent'],c['rule'],c['gold']
+ b=title(c,'The model lifecycle','Learning roadmap, from input data to measured feedback')
+ # A topographic-style contour route is a meaningful map of lifecycle, not a dashboard.
+ route='M96 175H350Q480 175 480 244T610 329H864'
+ b+=path(route,rule,10,'stroke-linecap="round"')+path(route,gr,2,'stroke-linecap="round"')
+ b+=path('M864 329Q916 329 916 280V147Q916 105 882 105H600',rule,1.5,'stroke-dasharray="5 7"')
+ nodes=[(96,175,'Ingest','Data checks',145,-1),(275,175,'Train','Version model',145,-1),(468,218,'Evaluate','Quality gates',208,-1),(610,329,'Serve','API / container',290,-1),(746,329,'Observe','Logs / metrics',368,1),(864,329,'Improve','Feedback',290,-1)]
+ for x,y,label,sub,ty,side in nodes:
+  b+=circle(x,y,9,c['bg'],f'stroke="{gr}" stroke-width="2"')
+  lx=x+100 if label=='Evaluate' else x
+  b+=t(lx,ty,label,20,fg,'middle',weight=600)+t(lx,ty+(22 if label=='Evaluate' or side==1 else -19),sub,15,dim,'middle')
+ b+=f'<circle r="5" cx="0" cy="0" fill="{gold}" class="moving" style="offset-path:path(\'{route}\');animation:journey 9s linear infinite"/>'
+ b+=t(896,94,'Feedback to the next experiment',16,dim,'end')
+ b+=t(32,413,'Evaluation and monitoring feed the next experiment.',17,dim)
+ css='@keyframes journey{0%{offset-distance:0%;opacity:0}7%,93%{opacity:1}100%{offset-distance:100%;opacity:0}}'
+ write('lifecycle',theme,432,'MLOps learning roadmap','Ingest, train, evaluate, serve, observe, improve. Feedback returns to the next experiment. Conceptual learning map.',b,css)
+
 def activity(theme,data):
-    c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    weeks=data['weeks'];counts=[w['count'] for w in weeks];total=sum(counts)
-    b=T(28,32,'GITHUB / DEVELOPMENT RECORD',12,ac,700,font=MONO)
-    for x,num,label in [(28,total,'Contributions'),(335,sum(n>0 for n in counts),'Active weeks'),(640,max(counts+[0]),'Peak week')]:
-        b+=T(x,91,str(num),43,fg,750,font=MONO)+T(x,113,label,13,dim)
-    b+=L('M28 132H932',c['rule'])
-    b+=T(28,153,f'{len(weeks)} calendar weeks · actual GitHub data',12,dim)
-    b+=T(932,153,data['as_of']+' UTC',12,dim,400,'end',MONO)
-    # Preserve machine-readable weekly values even though the snake displays the daily grid.
-    for w in weeks:
-        b+=G(f'<title>Week of {e(w["date"])}: {w["count"]} contributions</title>')
-    write('activity',theme,172,'GitHub development record',f'{total} contributions over {len(weeks)} weeks. Updated {data["as_of"]}.',b)
+ c=THEMES[theme];fg,dim,gr,rule=c['fg'],c['dim'],c['accent'],c['rule'];weeks=data['weeks'];counts=[w['count'] for w in weeks]
+ b=t(32,31,'Development record',21,fg,font=SERIF)+t(928,31,data['as_of']+' UTC',16,dim,'end',MONO)
+ for x,num,label in [(32,sum(counts),'Contributions'),(350,sum(n>0 for n in counts),'Active weeks'),(670,max(counts+[0]),'Peak week')]:b+=t(x,91,num,44,fg,weight=600,font=MONO)+t(x,118,label,18,dim)
+ b+=path('M32 138H928',rule)
+ for w in weeks:b+=g(f'<title>Week of {e(w["date"])}: {w["count"]} contributions</title>')
+ write('activity',theme,150,'GitHub contribution totals',f'{sum(counts)} contributions across {len(weeks)} weeks. Snapshot {data["as_of"]}.',b)
