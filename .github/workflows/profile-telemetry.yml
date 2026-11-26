@@ -7,6 +7,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/render_profile.py'
+      - 'scripts/neural_grid.py'
+      - 'scripts/test_*.py'
       - '.github/workflows/profile-telemetry.yml'
 permissions:
   contents: write

@@ -11,21 +11,39 @@
 <!-- Accessible, searchable profile copy. -->
 I’m a Computer Science and Engineering student exploring the intersection of machine learning, infrastructure and software engineering. My focus is **MLOps, applied AI/ML and backend engineering**: building reproducible workflows, serving models through APIs, automating delivery and improving system reliability.
 
+<img width="100%" src="assets/neural-grid.svg" alt="Neural Grid — an isometric compute fabric generated from the last 53 weeks of GitHub contributions. Each server node height encodes weekly activity; routes are conceptual animation." />
+
+<sub>One week, one compute node. The grid is derived from actual GitHub data, not live server traffic.</sub>
+
 <img width="100%" src="assets/pipeline.svg" alt="MLOps lifecycle: ingest, train, register, serve, observe and continuously improve." />
 
 <img width="100%" src="assets/stack.svg" alt="Engineering toolkit: Python, Java, C++, JavaScript, TypeScript, PyTorch, OpenCV, scikit-learn, Hugging Face, FastAPI, Flask, databases, Docker, Kubernetes, AWS, Terraform, Jenkins, GitHub Actions, Linux and React." />
 
-<img width="100%" src="assets/projects.svg" alt="Selected public projects: VOILORACLE, VerifAI, NexusCloud-Orchestra, CadastraVision, Projexa and Portfolio." />
+## Selected systems
 
-<div align="center">
+[<img width="100%" src="assets/system-voiloracle.svg" alt="VOILORACLE — news intelligence pipeline" />](https://github.com/Arunprasath-2717/VOILORACLE)
 
-[VOILORACLE](https://github.com/Arunprasath-2717/VOILORACLE) · [Application](https://veiloracle.vercel.app/) &nbsp; / &nbsp; [VerifAI](https://github.com/Arunprasath-2717/VerifAI) · [Application](https://verifai-mauve.vercel.app/)
+[Source](https://github.com/Arunprasath-2717/VOILORACLE) · [Open application](https://veiloracle.vercel.app/)
 
-[NexusCloud-Orchestra](https://github.com/Arunprasath-2717/NexusCloud-Orchestra) &nbsp; / &nbsp; [CadastraVision](https://github.com/Arunprasath-2717/CadastraVision)
+[<img width="100%" src="assets/system-verifai.svg" alt="VerifAI — evidence-first model verification" />](https://github.com/Arunprasath-2717/VerifAI)
 
-[Projexa](https://github.com/Arunprasath-2717/Projexa) · [Application](https://projexa-blond.vercel.app/) &nbsp; / &nbsp; [Portfolio](https://github.com/Arunprasath-2717/Portfolio) · [Website](https://arunprasath.me)
+[Source](https://github.com/Arunprasath-2717/VerifAI) · [Open application](https://verifai-mauve.vercel.app/)
 
-</div>
+[<img width="100%" src="assets/system-nexus.svg" alt="NexusCloud — multi-cloud storage routing" />](https://github.com/Arunprasath-2717/NexusCloud-Orchestra)
+
+[Source](https://github.com/Arunprasath-2717/NexusCloud-Orchestra)
+
+[<img width="100%" src="assets/system-cadastra.svg" alt="CadastraVision — parcel validation and audit systems" />](https://github.com/Arunprasath-2717/CadastraVision)
+
+[Source](https://github.com/Arunprasath-2717/CadastraVision)
+
+[<img width="100%" src="assets/system-projexa.svg" alt="Projexa — academic submissions and evaluation" />](https://github.com/Arunprasath-2717/Projexa)
+
+[Source](https://github.com/Arunprasath-2717/Projexa) · [Open application](https://projexa-blond.vercel.app/)
+
+[<img width="100%" src="assets/system-portfolio.svg" alt="Personal engineering website" />](https://github.com/Arunprasath-2717/Portfolio)
+
+[Source](https://github.com/Arunprasath-2717/Portfolio) · [Open application](https://arunprasath.me)
 
 <img width="100%" src="assets/telemetry.svg" alt="GitHub telemetry: repository counts, stars, forks, language breakdown, recent repository pushes and contribution calendar when available. Snapshot date displayed in the graphic." />
 

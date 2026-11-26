@@ -163,6 +163,9 @@ def main():
     if a.live==bool(a.snapshot): p.error('Choose exactly one: --live or --snapshot')
     data=fetch_live() if a.live else json.loads(a.snapshot.read_text())
     hero(); pipeline(); stack(); projects(); contact(); telemetry(data)
+    import neural_grid
+    neural_grid.r.ASSETS = ASSETS
+    neural_grid.render(data)
     # Fail before publishing malformed output.
     import xml.etree.ElementTree as ET
     for f in ASSETS.glob('*.svg'): ET.parse(f)
