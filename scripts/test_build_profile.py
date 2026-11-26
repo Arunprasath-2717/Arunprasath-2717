@@ -39,7 +39,7 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(len(refs),16)
         for f in refs:
             if f.endswith('.svg') and ('snake-' not in f or (p.ROOT/f).exists()): ET.parse(p.ROOT/f)
-            elif 'hero.' in f or 'hero-still.' in f: self.assertTrue((p.ROOT/f).exists())
+            elif 'hero' in f: self.assertTrue((p.ROOT/f).exists())
         data=json.loads((p.DATA/'contributions.json').read_text())
         p.validate(data)
         for theme in cinema.THEMES:
@@ -54,6 +54,12 @@ class ProfileTests(unittest.TestCase):
         self.assertTrue(b.startswith(b'GIF89a'))
         self.assertEqual(hashlib.sha256(b).hexdigest(),'c715ddae74810ddeb2ef7bb4ce3651f67e031275c394ff0a683fe01c8de39016')
         self.assertTrue((p.ASSETS/'hero-still.jpg').read_bytes().startswith(b'\xff\xd8'))
+        motion=(p.ASSETS/'hero-motion.webp').read_bytes()
+        self.assertEqual(motion[:4],b'RIFF')
+        self.assertEqual(motion[8:12],b'WEBP')
+        self.assertIn(b'ANIM',motion)
+        self.assertGreaterEqual(motion.count(b'ANMF'),36)
+        self.assertLess(len(motion),600000)
     def test_motion(self):
         for name in ('verifai','atlox','cane','toolchain','focus'):
             s=(p.ASSETS/f'{name}-dark.svg').read_text()

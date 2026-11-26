@@ -1,8 +1,10 @@
-<!-- AP/2717 • AP/2717 • Cinematic hero GIF and locally generated SVG modules. -->
+<!-- AP/2717 • Cinematic motion and locally generated SVG modules. -->
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-still.jpg">
-  <img src="assets/hero.gif" width="100%" alt="Arun Prasath — cinematic cloud command center. Backend Engineering, Applied AI and MLOps.">
+  <img src="assets/hero-motion.webp" width="100%" alt="Arun Prasath — cinematic cloud command center. Backend Engineering, Applied AI and MLOps.">
 </picture>
+
+<sub>[Play animation](assets/hero-motion.webp) · [GIF fallback](assets/hero.gif) · [Still image](assets/hero-still.jpg)</sub>
 
 [Portfolio](https://arunprasath.me) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/) · [LeetCode](https://leetcode.com/u/_Arun_Prasath_07_/) · [Email](mailto:arunprasath6035@gmail.com)
 
