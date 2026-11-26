@@ -28,9 +28,9 @@ def build():
         # Blend actual waterfall detail with an elongated, tiled flow texture.
         tex=detail.resize((w,th),Image.Resampling.BICUBIC); alpha=Image.new('L',(w,th));d=ImageDraw.Draw(alpha)
         for j in range(max(12,w*2)):
-            xx=rng.randrange(w);yy=rng.randrange(th);ll=rng.randrange(5,26);opacity=rng.randrange(7,38)
+            xx=rng.randrange(w);yy=rng.randrange(th);ll=rng.randrange(5,26);opacity=rng.randrange(16,58)
             for off in (-th,0,th):d.line((xx,yy+off,xx+rng.choice([0,0,1]),yy+ll+off),fill=opacity,width=1)
-        alpha=alpha.filter(ImageFilter.GaussianBlur(.7)); alpha=IC.add(alpha,tex.point(lambda n:max(0,min(35,(n-124)*2))))
+        alpha=alpha.filter(ImageFilter.GaussianBlur(.7)); alpha=IC.add(alpha,tex.point(lambda n:max(0,min(48,(n-124)*2))))
         rgba=Image.new('RGBA',(w,th),(232,251,246,255));rgba.putalpha(alpha)
         # White-alpha mask, bounded to the actual water surface.
         ma=Image.new('RGBA',(w,h),'white');ma.putalpha(mask)
@@ -38,11 +38,11 @@ def build():
         u=png(rgba);tiles=''.join(f'<image x="{x}" y="{y+k*th}" width="{w}" height="{th}" xlink:href="{u}"/>' for k in range(-1,math.ceil(h/th)+1))
         layers.append(f'<g mask="url(#water{i})"><g class="water" style="animation-duration:{speed}s;animation-delay:-{i*.39}s">{tiles}</g></g>')
     rng=random.Random(2717);p=[]
-    for i in range(26):
-        x=rng.randrange(90,1540);y=rng.randrange(100,448);r=rng.uniform(.85,2.0); dx=rng.choice([-1,1])*rng.randrange(12,35);dy=-rng.randrange(15,38)
+    for i in range(45):
+        x=rng.randrange(90,1540);y=rng.randrange(100,448);r=rng.uniform(1.1,2.8); dx=rng.choice([-1,1])*rng.randrange(12,35);dy=-rng.randrange(15,38)
         p.append(f'<circle cx="{x}" cy="{y}" r="{r:.1f}" fill="#fff0c1" opacity=".5" class="mote" style="--dx:{dx}px;--dy:{dy}px;animation-duration:{rng.randrange(7,14)}s;animation-delay:-{rng.uniform(0,12):.2f}s"/>')
     # Feathered mist is tied to the waterfall base. No camera transforms.
-    css='''.water{animation:water 2s linear infinite}.mote{animation:mote 10s ease-in-out infinite}.vapor{animation:vapor 12s ease-in-out infinite}@keyframes water{to{transform:translateY(64px)}}@keyframes mote{0%,100%{opacity:0;transform:translate(0,0)}20%{opacity:.52}75%{opacity:.4;transform:translate(var(--dx),var(--dy))}}@keyframes vapor{50%{transform:translate(18px,-5px);opacity:.65}}@media(prefers-reduced-motion:reduce){*{animation:none!important}.mote{opacity:.24}}'''
+    css='''.water{animation:water 2s linear infinite}.mote{animation:mote 10s ease-in-out infinite}.vapor{animation:vapor 12s ease-in-out infinite}@keyframes water{to{transform:translateY(64px)}}@keyframes mote{0%,100%{opacity:0;transform:translate(0,0)}20%{opacity:.8}75%{opacity:.48;transform:translate(var(--dx),var(--dy))}}@keyframes vapor{50%{transform:translate(18px,-5px);opacity:.65}}@media(prefers-reduced-motion:reduce){*{animation:none!important}.mote{opacity:.24}}'''
     # Name and role read as a film title, not an overlay card. Native text is sharp.
     out=f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="640" viewBox="0 0 1600 640" role="img" aria-labelledby="title desc"><title id="title">Arun Prasath</title><desc id="desc">Floating mountain ruins with flowing waterfalls, rising mist and drifting particles. Backend engineering, applied AI and MLOps.</desc><defs>{''.join(defs)}<clipPath id="frame"><rect width="1600" height="640"/></clipPath><linearGradient id="title-shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1712" stop-opacity="0"/><stop offset=".55" stop-color="#0c1712" stop-opacity="0"/><stop offset="1" stop-color="#07110d" stop-opacity=".94"/></linearGradient><radialGradient id="mist"><stop stop-color="#e6f4e7" stop-opacity=".20"/><stop offset="1" stop-color="#e6f4e7" stop-opacity="0"/></radialGradient><style>{css}</style></defs><g clip-path="url(#frame)"><image width="1600" height="640" preserveAspectRatio="xMidYMid slice" xlink:href="{uri(plate,'webp')}"/>{''.join(layers)}<g class="vapor" opacity=".55"><ellipse cx="893" cy="557" rx="105" ry="27" fill="url(#mist)"/><ellipse cx="1458" cy="428" rx="74" ry="24" fill="url(#mist)"/><ellipse cx="1007" cy="355" rx="76" ry="23" fill="url(#mist)"/></g>{''.join(p)}<rect width="1600" height="640" fill="url(#title-shade)"/><text x="800" y="526" text-anchor="middle" fill="#fffdf1" font-family="Georgia,serif" font-size="100" font-weight="400">Arun Prasath</text><text x="800" y="583" text-anchor="middle" fill="#f3f5ed" font-family="Arial,sans-serif" font-size="32" font-weight="500">Backend engineering · Applied AI · MLOps</text><path d="M756 607H844" stroke="#c2a975" stroke-width="2"/></g></svg>'''
     ET.fromstring(out);(A/'ruins-hero.svg').write_text(out); print('Hero:',len(out.encode()),'bytes')
@@ -80,4 +80,4 @@ def build_still():
     ET.ElementTree(root).write(A/'ruins-still.svg',encoding='unicode')
 
 if __name__=='__main__':
-    build();build_river();build_still()
+    build();build_still()

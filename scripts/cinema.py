@@ -2,7 +2,7 @@
 from pathlib import Path
 import html, math, xml.etree.ElementTree as ET
 OUT=Path(__file__).resolve().parents[1]/'assets'
-THEMES={'dark':dict(bg='#171c19',fg='#edf1e9',dim='#bbc6bd',rule='#46574b',accent='#b5d5ac',ink='#24312a',gold='#d7b477',quiet='#34433a'), 'light':dict(bg='#f4f7f3',fg='#1c2b22',dim='#45584b',rule='#afc1b1',accent='#286440',ink='#e4ebe3',gold='#805421',quiet='#d1dfd2')}
+THEMES={'dark':dict(bg='#1c2024',fg='#f3f1eb',dim='#bcc1c2',rule='#42484a',accent='#bfd5c7',ink='#24312a',gold='#d7b477',quiet='#34433a'), 'light':dict(bg='#f4f3ef',fg='#252b2d',dim='#515c60',rule='#c9cdca',accent='#286440',ink='#e4ebe3',gold='#805421',quiet='#d1dfd2')}
 SANS='Arial, Helvetica, sans-serif'; SERIF='Georgia, Times New Roman, serif'; MONO='Consolas, Liberation Mono, monospace'
 def e(s):return html.escape(str(s),quote=True)
 def t(x,y,s,size,c,anchor='start',font=SANS,weight=400,extra=''):
@@ -16,7 +16,7 @@ def write(name,theme,h,title,desc,body,css=''):
 def title(c,head,sub):return t(32,48,head,34,c['fg'],font=SERIF)+t(32,80,sub,17,c['dim'])
 def activity(theme,data):
  c=THEMES[theme];fg,dim,gr,rule=c['fg'],c['dim'],c['accent'],c['rule'];weeks=data['weeks'];counts=[w['count'] for w in weeks]
- b=t(32,31,'Development record',21,fg,font=SERIF)+t(928,31,data['as_of']+' UTC',16,dim,'end',MONO)
+ b=t(32,31,'Development record',21,fg,font=SANS)+t(928,31,data['as_of']+' UTC',16,dim,'end',MONO)
  for x,num,label in [(32,sum(counts),'Contributions'),(350,sum(n>0 for n in counts),'Active weeks'),(670,max(counts+[0]),'Peak week')]:b+=t(x,91,num,44,fg,weight=600,font=MONO)+t(x,118,label,18,dim)
  b+=path('M32 138H928',rule)
  for w in weeks:b+=g(f'<title>Week of {e(w["date"])}: {w["count"]} contributions</title>')

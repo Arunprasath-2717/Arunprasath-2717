@@ -40,10 +40,9 @@ def main():
     import fieldwork
     cinema.OUT=ASSETS
     fieldwork.OUT=ASSETS
-    fieldwork.skills()
-    fieldwork.cane()
+    fieldwork.build()
     for theme in THEMES:
         cinema.activity(theme,data)
     if a.live: source.write_text(json.dumps(data,indent=2)+'\n')
-    print('Generated 4 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
+    print('Generated 13 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
 if __name__=='__main__':main()

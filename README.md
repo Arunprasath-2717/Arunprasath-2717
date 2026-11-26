@@ -1,47 +1,50 @@
-<!-- AP/2717. Artwork and technical animations are stored in this repository. -->
+<!-- AP/2717 • self-contained motion graphics and measured GitHub data -->
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/ruins-still.svg">
-  <img src="assets/ruins-hero.svg" width="100%" alt="Arun Prasath. Backend engineering, applied AI and MLOps. A living landscape of floating mountains and ancient ruins.">
+  <img src="assets/ruins-hero.svg" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Floating mountain ruins with flowing waterfalls and drifting particles.">
 </picture>
 
-[Portfolio](https://arunprasath.me) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/) · [LeetCode](https://leetcode.com/u/_Arun_Prasath_07_/) · [Email](mailto:arunprasath6035@gmail.com)
+<div align="center">
+  <a href="https://arunprasath.me"><img src="assets/contact-portfolio.svg" width="49%" alt="Portfolio — projects and case studies"></a>
+  <a href="https://www.linkedin.com/in/arun-prasath-p-6ar01333/"><img src="assets/contact-linkedin.svg" width="49%" alt="LinkedIn — professional profile"></a>
+  <a href="https://leetcode.com/u/_Arun_Prasath_07_/"><img src="assets/contact-leetcode.svg" width="49%" alt="LeetCode — problem solving"></a>
+  <a href="mailto:arunprasath6035@gmail.com"><img src="assets/contact-email.svg" width="49%" alt="Email — get in touch"></a>
+</div>
 
-I'm a computer science student in India. I work on Python backends and applied machine learning, particularly retrieval, information extraction and systems that need to explain how they reached a decision. I'm learning how to make those systems reproducible, deployable and observable.
+I'm a computer science student in India building Python backends and applied AI systems, with an interest in retrieval, explainable decisions and reproducible model delivery.
 
 ## Selected work
 
-**[VerifAI](https://github.com/Arunprasath-2717/VerifAI)** — Compare AI answers, extract claims and verify them against retrieved evidence. Independent review preserves uncertainty instead of forcing a verdict.
+<a href="https://github.com/Arunprasath-2717/VerifAI"><img src="assets/project-verifai.svg" width="100%" alt="VerifAI — separate claims from evidence, independently review and retain uncertainty. Python, FastAPI, PostgreSQL and BM25."></a>
 
-`Python` · `FastAPI` · `PostgreSQL` · `BM25` · [Case study](https://arunprasath.me/work/verifai) · [Application](https://verifai-mauve.vercel.app/)
+<a href="https://arunprasath.me/work/verifai"><img src="assets/action-case.svg" width="145" alt="Case study"></a> <a href="https://verifai-mauve.vercel.app/"><img src="assets/action-app.svg" width="145" alt="Application"></a>
 
-**[Atlox AI / VOILORACLE](https://github.com/Arunprasath-2717/VOILORACLE)** — Multi-source news ingestion, deduplication, entity extraction and density-based event clustering, with Redis-backed processing.
+<a href="https://github.com/Arunprasath-2717/VOILORACLE"><img src="assets/project-atlox.svg" width="100%" alt="Atlox AI / VOILORACLE — news ingestion, deduplication, NLP and density-based event clustering. Python, FastAPI and Redis."></a>
 
-`Python` · `FastAPI` · `NLP` · `Redis` · [Case study](https://arunprasath.me/work/atlox-ai) · [Application](https://veiloracle.vercel.app/)
+<a href="https://arunprasath.me/work/atlox-ai"><img src="assets/action-case.svg" width="145" alt="Case study"></a> <a href="https://veiloracle.vercel.app/"><img src="assets/action-app.svg" width="145" alt="Application"></a>
 
-**[CANE](https://github.com/Arunprasath-2717/CANE)** — Context-aware multimodal notification routing using historical retrieval, deterministic scoring and explainable decisions, without an external LLM in the core pipeline.
+<a href="https://github.com/Arunprasath-2717/CANE"><img src="assets/field-cane.svg" width="100%" alt="CANE — deterministic, context-aware notification routing. Checked-in output: 110 decisions, 18 notify, 37 digest, 55 mute. Counts, not accuracy."></a>
 
-<img src="assets/field-cane.svg" width="100%" alt="CANE checked-in output: 110 predictions, 18 notify, 37 digest and 55 mute. This is a distribution of decisions, not an accuracy measure.">
-
-`Python` · `TF-IDF` · `RapidFuzz` · [Case study](https://arunprasath.me/work/cane) · [Prediction source](https://github.com/Arunprasath-2717/CANE/blob/main/dataset/output.csv)
+<a href="https://arunprasath.me/work/cane"><img src="assets/action-case.svg" width="145" alt="Case study"></a> <a href="https://github.com/Arunprasath-2717/CANE/blob/main/dataset/output.csv"><img src="assets/action-data.svg" width="145" alt="Prediction data"></a>
 
 ## Engineering toolkit
 
 <img src="assets/field-skills.svg" width="100%" alt="Languages: Python, Java, TypeScript, JavaScript, C/C++, SQL. Backend: FastAPI, Flask, Node.js, REST, SQLAlchemy, JWT. AI: PyTorch, Transformers, spaCy, scikit-learn, OpenCV. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, Supabase. Delivery: Linux, Docker, Git, GitHub Actions, CI/CD, Pytest. Web and quality: React, Next.js, Vite, HTML/CSS, WebSockets, Ruff, Mypy.">
 
-**Current focus:** Kubernetes, Terraform, AWS, experiment tracking, model registries, testable inference APIs and observability.
+**Currently learning:** Kubernetes, Terraform, AWS, experiment tracking, model registries, testable inference APIs and observability.
 
 ## Development activity
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/snake-light.svg">
-  <img src="assets/snake-dark.svg" width="100%" alt="Animated green snake on my actual GitHub contribution calendar.">
+  <img src="assets/snake-dark.svg" width="100%" alt="Animated green snake on my real GitHub contribution calendar.">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/activity-light.svg">
-  <img src="assets/activity-dark.svg" width="100%" alt="Actual GitHub contribution totals, active weeks and peak week.">
+  <img src="assets/activity-dark.svg" width="100%" alt="GitHub contributions, active weeks and peak week.">
 </picture>
 
-<sub>Updated every six hours · [Weekly counts](data/contributions.json) · [Snake generator](https://github.com/Platane/snk)</sub>
+<sub>Refreshed every six hours · [Weekly data](data/contributions.json) · [Snake generator](https://github.com/Platane/snk). Project animations are illustrative; CANE counts are from its checked-in dataset.</sub>
 
-Open to software engineering internships in backend, platform engineering and applied AI.
+Open to backend, platform engineering and applied AI internships.

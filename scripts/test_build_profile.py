@@ -20,9 +20,9 @@ class ProfileTests(unittest.TestCase):
     def test_render(self):
         profile=json.loads((p.DATA/'profile.json').read_text());data={'as_of':'2026-11-26','weeks':[{'date':'2026-11-15','count':0},{'date':'2026-11-22','count':9}]}
         with tempfile.TemporaryDirectory() as d,patch.object(cinema,'OUT',pathlib.Path(d)),patch.object(fieldwork,'OUT',pathlib.Path(d)):
-            fieldwork.skills();fieldwork.cane()
+            fieldwork.build()
             for theme in cinema.THEMES:cinema.activity(theme,data)
-            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),4)
+            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),13)
             for f in files:
                 svg=f.read_text();root=ET.fromstring(svg)
                 self.assertEqual(root.attrib['role'],'img')
@@ -32,7 +32,7 @@ class ProfileTests(unittest.TestCase):
             self.assertIn('Week of 2026-11-22: 9 contributions',(pathlib.Path(d)/'activity-dark.svg').read_text())
     def test_readme_assets(self):
         md=(p.ROOT/'README.md').read_text();refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
-        self.assertEqual(len(refs),8)
+        self.assertEqual(len(refs),17)
         for f in refs:
             self.assertTrue((p.ROOT/f).is_file(),f)
             if f.endswith(".svg"):ET.parse(p.ROOT/f)
@@ -52,7 +52,7 @@ class ProfileTests(unittest.TestCase):
         self.assertNotIn('animation:',(p.ASSETS/'ruins-still.svg').read_text())
         root=ET.parse(p.ASSETS/'ruins-hero.svg').getroot();name=[t for t in root.findall('.//s:text',NS) if t.text=='Arun Prasath'];self.assertEqual(len(name),1);self.assertEqual(name[0].attrib['text-anchor'],'middle')
     def test_motion(self):
-        for name in ('field-skills.svg','field-cane.svg'):
+        for name in ('field-skills.svg','field-cane.svg','project-verifai.svg','project-atlox.svg'):
             svg=(p.ASSETS/name).read_text()
             self.assertIn('@keyframes',svg)
             self.assertIn('animation:',svg)
