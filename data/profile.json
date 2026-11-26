@@ -1,0 +1,29 @@
+{
+  "name": "Arun Prasath",
+  "handle": "Arunprasath-2717",
+  "role": "Backend engineering / Applied AI / MLOps",
+  "projects": [
+    {
+      "slug": "verifai",
+      "name": "VerifAI",
+      "category": "AI VERIFICATION",
+      "summary": ["Separate model claims from evidence.", "Keep uncertainty and decisions auditable."],
+      "stack": "Python / FastAPI / PostgreSQL / Pytest",
+      "flow": ["AI answer", "Claims", "Evidence", "Verdict"],
+      "caption": "Independent checks, explicit unknowns",
+      "repo": "https://github.com/Arunprasath-2717/VerifAI",
+      "case": "https://arunprasath.me/work/verifai"
+    },
+    {
+      "slug": "atlox",
+      "name": "Atlox AI",
+      "category": "NEWS INTELLIGENCE",
+      "summary": ["Group multi-source news into events.", "Analyze sentiment, entities and trends."],
+      "stack": "FastAPI / PyTorch / Transformers / Redis",
+      "flow": ["News feeds", "Normalize", "NLP", "Events"],
+      "caption": "Deduplication, clustering, event analysis",
+      "repo": "https://github.com/Arunprasath-2717/VOILORACLE",
+      "case": "https://arunprasath.me/work/atlox-ai"
+    }
+  ]
+}

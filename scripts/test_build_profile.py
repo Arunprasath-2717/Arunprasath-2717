@@ -1,46 +1,49 @@
-import pathlib
-import re
-import unittest
+import json, pathlib, re, tempfile, unittest
 import xml.etree.ElementTree as ET
 from unittest.mock import patch
 from io import BytesIO
-import json
 import build_profile as p
 
-class ArtworkTests(unittest.TestCase):
-    def test_data_and_xml(self):
-        weeks=[('2026-11-15',0),('2026-11-22',9)]
-        svg=p.render(weeks,'2026-11-26')
-        root=ET.fromstring(svg)
-        self.assertEqual(root.attrib['viewBox'],'0 0 960 508')
-        self.assertIn('9 contributions / 2 weeks',svg)
-        self.assertIn('Week of 2026-11-15: 0 contributions',svg)
-        self.assertIn('Week of 2026-11-22: 9 contributions',svg)
-        self.assertIn('prefers-reduced-motion',svg)
-        for forbidden in ('linearGradient','radialGradient','<filter','<script','foreignObject','http://www.w3.org/1999/xlink'):
-            self.assertNotIn(forbidden,svg)
-        self.assertLess(len(svg.encode()),40_000)
-
-    def test_missing_data(self):
-        svg=p.render([],'2026-11-26')
-        self.assertIn('Calendar unavailable',svg)
-        self.assertNotIn('contributions /',svg)
-
-    def test_api_aggregation(self):
+class ProfileTests(unittest.TestCase):
+    def test_calendar_aggregation(self):
         payload={'data':{'user':{'contributionsCollection':{'contributionCalendar':{'weeks':[
             {'contributionDays':[{'date':'2026-11-22','contributionCount':3},{'date':'2026-11-23','contributionCount':5}]},
             {'contributionDays':[{'date':'2026-11-15','contributionCount':1}]}]}}}}}
         with patch.object(p.urllib.request,'urlopen',return_value=BytesIO(json.dumps(payload).encode())):
-            self.assertEqual(p.calendar('test'),[('2026-11-15',1),('2026-11-22',8)])
-
-    def test_published_asset_and_readme(self):
-        svg=p.ASSET.read_text()
-        ET.fromstring(svg)
-        self.assertEqual(len(re.findall(r'<title>Week of ',svg)),53)
-        readme=(p.ROOT/'README.md').read_text()
-        self.assertIn('assets/workshop.svg',readme)
-        self.assertEqual(len(re.findall(r'^\*\*\[',readme,re.M)),2)
-        for asset in re.findall(r'src="(assets/[^"]+)"',readme):
-            self.assertTrue((p.ROOT/asset).exists())
-
-if __name__=='__main__': unittest.main()
+            self.assertEqual(p.fetch('test')['weeks'],[{'date':'2026-11-15','count':1},{'date':'2026-11-22','count':8}])
+    def test_invalid_snapshot(self):
+        with self.assertRaises(AssertionError):
+            p.validate({'as_of':'2026-11-26','weeks':[{'date':'2026-11-22','count':-1}]})
+    def test_render(self):
+        profile=json.loads((p.DATA/'profile.json').read_text())
+        data={'as_of':'2026-11-26','weeks':[{'date':'2026-11-15','count':0},{'date':'2026-11-22','count':9}]}
+        with tempfile.TemporaryDirectory() as d, patch.object(p,'ASSETS',pathlib.Path(d)):
+            for theme in p.PALETTES:
+                p.hero(theme,profile)
+                for i,project in enumerate(profile['projects'],1): p.project(theme,project,i)
+                p.toolkit(theme);p.activity(theme,data)
+            files=list(pathlib.Path(d).glob('*.svg'))
+            self.assertEqual(len(files),10)
+            for f in files:
+                s=f.read_text();root=ET.fromstring(s)
+                self.assertIn('role',root.attrib)
+                self.assertIn('prefers-reduced-motion',s)
+                for token in ('linearGradient','radialGradient','<script','<filter','foreignObject'):
+                    self.assertNotIn(token,s)
+                self.assertLess(len(s.encode()),30000)
+            s=(pathlib.Path(d)/'activity-dark.svg').read_text()
+            self.assertIn('Week of 2026-11-22: 9 contributions',s)
+    def test_readme_assets(self):
+        md=(p.ROOT/'README.md').read_text()
+        refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
+        self.assertEqual(len(refs),10)
+        for f in refs: ET.parse(p.ROOT/f)
+        data=json.loads((p.DATA/'contributions.json').read_text())
+        p.validate(data)
+        for theme in p.PALETTES:
+            s=(p.ASSETS/f'activity-{theme}.svg').read_text()
+            self.assertEqual(len(re.findall(r'<title>Week of ',s)),len(data['weeks']))
+    def test_api_failure(self):
+        with patch.object(p.urllib.request,'urlopen',return_value=BytesIO(b'{"errors":[{"message":"unavailable"}]}')):
+            with self.assertRaises(ValueError): p.fetch('test')
+if __name__=='__main__':unittest.main()
