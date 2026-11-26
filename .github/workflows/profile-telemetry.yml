@@ -7,7 +7,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/render_profile.py'
-      - 'scripts/neural_grid.py'
+      - 'scripts/forge.py'
       - 'scripts/test_*.py'
       - '.github/workflows/profile-telemetry.yml'
 permissions:
@@ -27,14 +27,14 @@ jobs:
       - name: Generate from GitHub API
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/render_profile.py --live
+        run: python3 scripts/forge.py --live
       - name: Test renderer
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
       - name: Commit generated assets if changed
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/*.svg
+          git add assets/forge.svg
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'chore(profile): refresh GitHub telemetry'
           git push origin HEAD:main
