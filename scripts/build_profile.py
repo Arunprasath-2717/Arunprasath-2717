@@ -39,9 +39,8 @@ def main():
     import cinema
     cinema.OUT=ASSETS
     for theme in THEMES:
-        cinema.hero(theme)
         for i,p in enumerate(profile['projects'],1): cinema.project(theme,p,i)
-        cinema.toolkit(theme);cinema.timeline(theme);cinema.activity(theme,data)
+        cinema.toolkit(theme);cinema.focus(theme);cinema.activity(theme,data)
     if a.live: source.write_text(json.dumps(data,indent=2)+'\n')
-    print('Generated 14 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
+    print('Generated 12 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
 if __name__=='__main__':main()

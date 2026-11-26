@@ -1,7 +1,7 @@
-<!-- AP/2717 • Night Shift • Original SVG artwork, generated locally. -->
+<!-- AP/2717 • AP/2717 • Cinematic hero GIF and locally generated SVG modules. -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/identity-dark.svg">
-  <img src="assets/identity-light.svg" width="100%" alt="Arun Prasath — backend engineering, applied AI and MLOps. An animated night-shift Linux workstation and server corridor.">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-still.jpg">
+  <img src="assets/hero.gif" width="100%" alt="Arun Prasath — cinematic cloud command center. Backend Engineering, Applied AI and MLOps.">
 </picture>
 
 [Portfolio](https://arunprasath.me) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/) · [LeetCode](https://leetcode.com/u/_Arun_Prasath_07_/) · [Email](mailto:arunprasath6035@gmail.com)
@@ -52,21 +52,26 @@ My next frontier is MLOps — reproducible training, model versioning, container
   <img src="assets/toolchain-light.svg" width="100%" alt="Languages: Python, TypeScript, Java, JavaScript, C, C++, SQL. Backend: FastAPI, Flask, Node.js, REST, SQLAlchemy, JWT. Applied AI: PyTorch, Transformers, spaCy, scikit-learn, BM25, OpenCV, evaluation. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, Supabase. Delivery: Linux, Docker, Git, GitHub Actions, CI/CD, Pytest, Ruff, Mypy. Frontend: React, Next.js, Vite, HTML, CSS, WebSockets. Learning Kubernetes, Terraform, AWS, model registries, experiment tracking and observability.">
 </picture>
 
-## 03 — Engineering journey
+## 03 — Current focus
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/journey-dark.svg">
-  <img src="assets/journey-light.svg" width="100%" alt="B.E. Computer Science and Engineering at Sri Shakthi Institute, 2024–2028. Internships at Ascentz Technologies, Pluto Academy and Thiranex in 2025. Code Rush second place and Render Rush event lead in 2026.">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/focus-dark.svg">
+  <img src="assets/focus-light.svg" width="100%" alt="Reliable backends, applied intelligence and ML infrastructure. Current study: Kubernetes, Terraform, AWS, model serving and observability.">
 </picture>
 
-## 04 — Build history
+## 04 — Contribution activity
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
-  <img src="assets/activity-light.svg" width="100%" alt="GitHub contributions, active weeks, peak week and a chronological chart of actual weekly counts.">
+  <img src="assets/activity-light.svg" width="100%" alt="Actual GitHub contributions, active weeks and peak week.">
 </picture>
 
-<sub>Updated from GitHub every six hours. <a href="data/contributions.json">Raw weekly data</a> · Artwork and project animations are illustrations, not live operational metrics.</sub>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/snake-dark.svg">
+  <img src="assets/snake-light.svg" width="100%" alt="Animated snake moving through my actual green GitHub contribution calendar.">
+</picture>
+
+<sub>Contribution data refreshes every six hours. <a href="data/contributions.json">Weekly data</a> · <a href="https://github.com/Platane/snk">Contribution snake generator</a>. The cinematic hero and project animations are illustrative.</sub>
 
 ---
 

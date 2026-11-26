@@ -20,11 +20,10 @@ class ProfileTests(unittest.TestCase):
         data={'as_of':'2026-11-26','weeks':[{'date':'2026-11-15','count':0},{'date':'2026-11-22','count':9}]}
         with tempfile.TemporaryDirectory() as d, patch.object(cinema,'OUT',pathlib.Path(d)):
             for theme in cinema.THEMES:
-                cinema.hero(theme)
                 for i,project in enumerate(profile['projects'],1): cinema.project(theme,project,i)
-                cinema.toolkit(theme);cinema.timeline(theme);cinema.activity(theme,data)
+                cinema.toolkit(theme);cinema.focus(theme);cinema.activity(theme,data)
             files=list(pathlib.Path(d).glob('*.svg'))
-            self.assertEqual(len(files),14)
+            self.assertEqual(len(files),12)
             for f in files:
                 s=f.read_text();root=ET.fromstring(s)
                 self.assertEqual(root.attrib['role'],'img')
@@ -37,8 +36,10 @@ class ProfileTests(unittest.TestCase):
     def test_readme_assets(self):
         md=(p.ROOT/'README.md').read_text()
         refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
-        self.assertEqual(len(refs),14)
-        for f in refs: ET.parse(p.ROOT/f)
+        self.assertEqual(len(refs),16)
+        for f in refs:
+            if f.endswith('.svg') and ('snake-' not in f or (p.ROOT/f).exists()): ET.parse(p.ROOT/f)
+            elif 'hero.' in f or 'hero-still.' in f: self.assertTrue((p.ROOT/f).exists())
         data=json.loads((p.DATA/'contributions.json').read_text())
         p.validate(data)
         for theme in cinema.THEMES:
@@ -47,8 +48,14 @@ class ProfileTests(unittest.TestCase):
     def test_api_failure(self):
         with patch.object(p.urllib.request,'urlopen',return_value=BytesIO(b'{"errors":[{"message":"unavailable"}]}')):
             with self.assertRaises(ValueError): p.fetch('test')
+    def test_hero(self):
+        import hashlib
+        b=(p.ASSETS/'hero.gif').read_bytes()
+        self.assertTrue(b.startswith(b'GIF89a'))
+        self.assertEqual(hashlib.sha256(b).hexdigest(),'c715ddae74810ddeb2ef7bb4ce3651f67e031275c394ff0a683fe01c8de39016')
+        self.assertTrue((p.ASSETS/'hero-still.jpg').read_bytes().startswith(b'\xff\xd8'))
     def test_motion(self):
-        for name in ('identity','verifai','atlox','cane','toolchain','journey','activity'):
+        for name in ('verifai','atlox','cane','toolchain','focus'):
             s=(p.ASSETS/f'{name}-dark.svg').read_text()
             self.assertIn('@keyframes',s)
             self.assertIn('animation:',s)
