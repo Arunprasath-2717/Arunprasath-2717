@@ -7,9 +7,17 @@
       "slug": "verifai",
       "name": "VerifAI",
       "category": "AI VERIFICATION",
-      "summary": ["Separate model claims from evidence.", "Keep uncertainty and decisions auditable."],
+      "summary": [
+        "Separate model claims from evidence.",
+        "Keep uncertainty and decisions auditable."
+      ],
       "stack": "Python / FastAPI / PostgreSQL / Pytest",
-      "flow": ["AI answer", "Claims", "Evidence", "Verdict"],
+      "flow": [
+        "AI answer",
+        "Claims",
+        "Evidence",
+        "Verdict"
+      ],
       "caption": "Independent checks, explicit unknowns",
       "repo": "https://github.com/Arunprasath-2717/VerifAI",
       "case": "https://arunprasath.me/work/verifai"
@@ -18,12 +26,39 @@
       "slug": "atlox",
       "name": "Atlox AI",
       "category": "NEWS INTELLIGENCE",
-      "summary": ["Group multi-source news into events.", "Analyze sentiment, entities and trends."],
+      "summary": [
+        "Group multi-source news into events.",
+        "Analyze sentiment, entities and trends."
+      ],
       "stack": "FastAPI / PyTorch / Transformers / Redis",
-      "flow": ["News feeds", "Normalize", "NLP", "Events"],
+      "flow": [
+        "News feeds",
+        "Normalize",
+        "NLP",
+        "Events"
+      ],
       "caption": "Deduplication, clustering, event analysis",
       "repo": "https://github.com/Arunprasath-2717/VOILORACLE",
       "case": "https://arunprasath.me/work/atlox-ai"
+    },
+    {
+      "slug": "cane",
+      "name": "CANE",
+      "category": "CONTEXT-AWARE ROUTING",
+      "summary": [
+        "Route incoming messages by context.",
+        "Explain every notify, digest or mute decision."
+      ],
+      "stack": "Python / TF-IDF / RapidFuzz / Rules",
+      "flow": [
+        "Messages",
+        "Context",
+        "Score",
+        "Route"
+      ],
+      "caption": "Deterministic decisions with evidence",
+      "repo": "https://github.com/Arunprasath-2717/CANE",
+      "case": "https://arunprasath.me/work/cane"
     }
   ]
 }

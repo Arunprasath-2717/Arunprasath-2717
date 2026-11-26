@@ -145,6 +145,22 @@ def project(theme,p,index):
             b+=G(q,f'class="review" style="animation-delay:{-i*1.2}s"')
         b+=R(502,183,410,2,c['rule'])
         b+=R(502,183,75,2,gr,extra='class="scanner"')
+    elif p['slug']=='cane':
+        # Example messages enter a deterministic router and land in three distinct trays.
+        b+=T(502,39,'CONTEXT-AWARE ROUTER',11,dim,700,font=MONO)
+        b+=R(502,54,108,118,c['bg'],4)+T(515,73,'INBOX',10,dim,700,font=MONO)
+        for i,(label,detail) in enumerate([('Message','Urgent'),('Message','Routine'),('Message','Untrusted')]):
+            y=82+i*27
+            b+=R(511,y,90,23,c['paper'],3)+T(517,y+15,detail,10,fg,600)
+        b+=R(635,87,92,52,c['bg'],5)+T(681,109,'CONTEXT',12,ac,750,'middle',MONO)+T(681,125,'score + rules',10,dim,400,'middle')
+        b+=L('M610 113H635',c['rule'],3)+L('M727 113H751',c['rule'],3)
+        for i,(label,color) in enumerate([('NOTIFY',gr),('DIGEST',ac),('MUTE',dim)]):
+            y=59+i*42
+            b+=L(f'M751 113V{y+15}H769',c['rule'],2)
+            b+=R(769,y,145,31,c['bg'],4)+R(769,y,5,31,color,2)
+            b+=T(783,y+20,label,12,color,750,font=MONO)
+            b+=C(900,y+15,3.7,color,extra=f'class="packetlight" style="animation-delay:{-i*1.1}s"')
+        b+=T(502,184,'Example routing · same inputs, same outputs',10,dim)
     else:
         # News packets enter an editorial stream and resolve into event clusters.
         b+=T(502,39,'STREAM PROCESSING',11,dim,700,font=MONO)
@@ -163,54 +179,99 @@ def project(theme,p,index):
 
 def toolkit(theme):
     c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    b=T(30,36,'THE TOOLCHAIN',13,ac,700,font=MONO,extra='letter-spacing="2"')
-    b+=T(30,83,'From shell to service.',38,fg,700,font=SERIF)
-    b+=T(930,36,'CAPABILITIES / 2717',11,dim,600,'end',MONO)
+    b=T(28,35,'02 / ENGINEERING TOOLCHAIN',12,ac,700,font=MONO,extra='letter-spacing="1.5"')
+    b+=T(28,80,'From source to serving.',37,fg,700,font=SERIF)
+    b+=T(930,35,'AP / 2717',11,dim,600,'end',MONO)
+    # A small connected deployment sequence. Stages are interests, not measured infrastructure.
+    b+=R(28,101,904,100,c['paper'],6)
+    stages=[('01','LINUX','Develop'),('02','GIT / CI','Test & build'),('03','DOCKER','Package'),('04','CLOUD','Deploy'),('05','ML','Serve & evaluate')]
+    for i,(num,label,sub) in enumerate(stages):
+        x=45+i*179
+        if i<4:
+            b+=L(f'M{x+143} 144H{x+178}',c['rule'],3)
+            b+=L(f'M{x+143} 144H{x+178}',gr,2,'stroke-dasharray="5 15" class="flow"')
+        b+=R(x,115,143,57,c['bg'],5)
+        b+=T(x+10,132,num,10,ac,700,font=MONO)
+        b+=T(x+10,152,label,15,fg,750,font=MONO)
+        b+=T(x+4,188,sub,12,dim)
     groups=[
-        ('01','Languages','Python · TypeScript · Java','JavaScript · C / C++ · SQL'),
-        ('02','Backend','FastAPI · Flask · Node.js','REST APIs · SQLAlchemy · JWT'),
-        ('03','Applied AI','PyTorch · Transformers · spaCy','scikit-learn · BM25 · evaluation'),
-        ('04','Data systems','PostgreSQL · PostGIS · Redis','SQLite · MongoDB · Supabase'),
-        ('05','Linux & delivery','Linux · Docker · Git · Actions','CI/CD · Pytest · Ruff · Mypy'),
-        ('06','Frontend','React · Next.js · Vite','HTML / CSS · WebSockets')]
-    for i,(n,title,a,d) in enumerate(groups):
-        x=30+(i%2)*460;y=112+(i//2)*91
-        b+=L(f'M{x} {y}H{x+440}',c['rule'])
-        b+=T(x,y+24,n,12,gr,700,font=MONO)+T(x+35,y+25,title,21,fg,700)
-        b+=T(x+35,y+50,a,15,fg)+T(x+35,y+70,d,14,dim)
-    b+=R(30,390,900,59,c['paper'],5)
-    b+=T(45,411,'LEARNING NEXT',11,ac,700,font=MONO)
-    b+=T(45,432,'Kubernetes · Terraform · Model registry · Experiment tracking · Observability',15,fg)
-    b+=R(30,464,900,2,c['rule'])+R(30,464,54,2,gr,extra='class="trace"')
-    write('toolchain',theme,485,'Engineering skills','Languages, backend, applied AI, data systems, Linux and delivery, and frontend. Learning next: Kubernetes, Terraform, model registry, experiment tracking and observability.',b,'.trace{animation:trace 14s ease-in-out infinite}@keyframes trace{0%,100%{transform:translateX(0)}50%{transform:translateX(846px)}}')
+      ('01','LANGUAGES',['Python','Java','TypeScript','JavaScript','C / C++','SQL']),
+      ('02','BACKEND',['FastAPI','Flask','Node.js','REST APIs','SQLAlchemy','JWT']),
+      ('03','APPLIED AI',['PyTorch','Transformers','spaCy','scikit-learn','BM25','OpenCV','Evaluation']),
+      ('04','DATA SYSTEMS',['PostgreSQL','PostGIS','Redis','SQLite','MongoDB','Supabase']),
+      ('05','LINUX & DELIVERY',['Linux','Docker','Git','GitHub Actions','CI/CD','Pytest','Ruff','Mypy']),
+      ('06','WEB ENGINEERING',['React','Next.js','Vite','HTML / CSS','WebSockets'])
+    ]
+    # Type-led groups with small filled labels, rather than fake proficiency gauges.
+    for i,(num,label,skills) in enumerate(groups):
+        x=28+(i%2)*460;y=225+(i//2)*105
+        b+=L(f'M{x} {y}H{x+442}',c['rule'])
+        b+=R(x,y+12,27,24,ac,3)+T(x+13.5,y+29,num,11,c['black'] if theme=='dark' else '#ffffff',750,'middle',MONO)
+        b+=T(x+39,y+29,label,14,fg,750,font=MONO)
+        cx=x;cy=y+43
+        for j,skill in enumerate(skills):
+            w=15+len(skill)*7.4
+            if cx+w>x+442:cx=x;cy+=29
+            b+=R(round(cx,1),cy,round(w,1),23,c['paper'],4)
+            b+=T(round(cx+7,1),cy+15,skill,12,fg,550)
+            cx+=w+6
+    b+=R(28,551,904,65,c['paper'],6)
+    b+=T(42,571,'CURRENT STUDY / MLOPS',11,ac,750,font=MONO)
+    b+=T(42,593,'Kubernetes · Terraform · AWS · Model registries · Experiment tracking · Observability',14,fg)
+    write('toolchain',theme,633,'Engineering toolchain','Six skill domains and a Linux to model-serving delivery sequence. Kubernetes, Terraform, AWS and MLOps topics are current learning interests.',b,'.flow{animation:flow 2.2s linear infinite}@keyframes flow{to{stroke-dashoffset:-40}}')
 
 def timeline(theme):
     c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
-    b=T(30,37,'THE JOURNEY',13,ac,700,font=MONO,extra='letter-spacing="2"')
-    b+=T(30,79,'Learning by building.',34,fg,700,font=SERIF)
-    b+=L('M65 113V282',c['rule'],3)
-    records=[('2024–28','B.E. Computer Science & Engineering','Sri Shakthi Institute of Engineering and Technology'),('2025','Three internships','Ascentz Technologies · Pluto Academy · Thiranex'),('2026','Code Rush — 2nd place','Kanam 2K26, NGP College'),('2026','Render Rush — event lead','Kalam 2026')]
-    for i,(year,heading,detail) in enumerate(records):
-        y=119+i*54
-        b+=C(65,y,6,gr)+T(85,y+4,year,13,ac,700,font=MONO)+T(209,y+3,heading,18,fg,650)+T(209,y+24,detail,13,dim)
-    b+=T(30,338,'OPEN TO SOFTWARE ENGINEERING INTERNSHIPS',12,gr,650,font=MONO)
-    write('journey',theme,362,'Education and experience','B.E. CSE 2024–2028. Three internships in 2025. Code Rush second place and Render Rush event lead in 2026.',b)
+    b=T(28,35,'03 / ENGINEERING JOURNEY',12,ac,700,font=MONO,extra='letter-spacing="1.5"')
+    b+=T(28,80,'The work behind the work.',36,fg,700,font=SERIF)
+    # Three horizontal chapters with clear hierarchy and chronological order.
+    chapters=[
+      (28,'2024–28','FOUNDATIONS',[('B.E. Computer Science','Sri Shakthi Institute of','Engineering and Technology')]),
+      (334,'2025','EXPERIENCE',[('Ascentz Technologies','Full-stack web development',''),('Pluto Academy','AI & machine learning',''),('Thiranex','Full-stack web development','')]),
+      (640,'2026','MILESTONES',[('Code Rush · 2nd place','Kanam 2K26, NGP College',''),('Render Rush · event lead','Kalam 2026','')])
+    ]
+    b+=L('M48 122H910',c['rule'],3)
+    for i,(x,year,heading,records) in enumerate(chapters):
+        b+=C(x+18,122,8,ac if i==2 else gr)
+        b+=C(x+18,122,13,'none',extra=f'stroke="{gr}" stroke-width="1.5" class="halo" style="animation-delay:{-i*.9}s"')
+        b+=T(x,151,year,19,fg,750,font=MONO)+T(x,174,heading,11,ac,700,font=MONO,extra='letter-spacing="1"')
+        for j,(title,a,d) in enumerate(records):
+            y=191+j*64
+            b+=R(x,y,282,56,c['paper'],4)
+            b+=T(x+11,y+19,title,14,fg,700)
+            b+=T(x+11,y+36,a,12,dim)
+            if d:b+=T(x+11,y+50,d,12,dim)
+    b+=R(28,397,894,41,c['paper'],5)
+    b+=C(43,417,4,gr,extra='class="halo"')
+    b+=T(57,422,'OPEN TO SOFTWARE ENGINEERING INTERNSHIPS',12,fg,700,font=MONO)
+    b+=T(908,422,'BACKEND / PLATFORM / AI',11,dim,500,'end',MONO)
+    write('journey',theme,455,'Engineering journey','B.E. CSE 2024–2028. Three internships in 2025. Code Rush second place and Render Rush event lead in 2026.',b,'.halo{animation:halo 5s ease-in-out infinite}@keyframes halo{50%{opacity:.32}}')
 
 def activity(theme,data):
     c=THEMES[theme];fg,dim,ac,gr=c['fg'],c['dim'],c['accent'],c['leaf']
     weeks=data['weeks'];counts=[w['count'] for w in weeks];peak=max(counts+[1]);total=sum(counts)
-    b=T(30,35,'THE DEVELOPMENT RECORD',13,ac,700,font=MONO,extra='letter-spacing="1.4"')
-    b+=T(30,92,str(total),52,fg,750)+T(30,113,'GitHub contributions',13,dim)
-    b+=T(276,92,str(sum(n>0 for n in counts)),44,fg,700)+T(276,113,'Active weeks',13,dim)
-    b+=T(455,92,str(max(counts+[0])),44,fg,700)+T(455,113,'Peak week',13,dim)
-    b+=T(930,76,data['as_of']+' UTC',13,fg,650,'end',MONO)+T(930,101,'Last '+str(len(weeks))+' calendar weeks',12,dim,400,'end')
-    b+=R(30,136,900,112,c['paper'],3)
-    for i in range(5):b+=L(f'M42 {154+i*21}H918',c['rule'],.7)
-    step=876/max(1,len(weeks))
+    b=T(28,35,'04 / BUILD HISTORY',12,ac,700,font=MONO,extra='letter-spacing="1.5"')
+    b+=T(28,84,'The signal of steady work.',35,fg,700,font=SERIF)
+    b+=T(932,35,data['as_of']+' UTC',12,dim,500,'end',MONO)
+    for x,num,label in [(28,total,'Contributions'),(338,sum(n>0 for n in counts),'Active weeks'),(640,max(counts+[0]),'Peak week')]:
+        b+=T(x,145,str(num),41,fg,750,font=MONO)+T(x,167,label,13,dim)
+    # Real weekly data rendered as an illuminated equipment array. Each channel
+    # has a linear bar behind a matte rack grille; no artificial events.
+    b+=R(28,185,904,135,c['paper'],6)
+    baseline=298;step=872/max(1,len(weeks))
+    for j in range(5):
+        y=baseline-j*23
+        b+=L(f'M44 {y}H916',c['rule'],.8)
     for i,w in enumerate(weeks):
-        x=42+i*step;n=w['count'];h=round(81*n/peak,2)
-        b+=G(f'<title>Week of {e(w["date"])}: {n} contributions</title>'+R(round(x,2),round(237-h,2),round(step-4,2),max(1,h),ac if n==peak and n else gr if n else c['rule'],1,extra='class="latest"' if i==len(weeks)-1 else ''))
+        x=44+i*step;n=w['count'];h=round(92*n/peak,2);bw=max(2,step-4)
+        bar=R(round(x,2),203,round(bw,2),95,c['bg'],2)
+        if n:bar+=R(round(x,2),round(baseline-h,2),round(bw,2),h,ac if n==peak else gr,1)
+        else:bar+=R(round(x,2),baseline-1,round(bw,2),1,c['rule'])
+        # Small header LED only marks latest calendar week, not fabricated live traffic.
+        if i==len(weeks)-1:bar+=C(round(x+bw/2,2),195,3,ac,extra='class="last"')
+        b+=G(f'<title>Week of {e(w["date"])}: {n} contributions</title>'+bar)
+    b+=T(44,314,'OLDEST',9,dim,650,font=MONO)+T(916,314,'LATEST',9,dim,650,'end',MONO)
     if weeks:
-        b+=T(30,272,weeks[0]['date'],11,dim,font=MONO)+T(930,272,weeks[-1]['date'],11,dim,400,'end',MONO)
-    b+=T(480,297,'Actual weekly counts · linear scale · refreshed every six hours',12,dim,400,'middle')
-    write('activity',theme,316,'GitHub development record',f'{total} contributions over {len(weeks)} weeks. Updated {data["as_of"]}.',b,'.latest{animation:latest 4s ease-in-out infinite}@keyframes latest{50%{opacity:.5}}')
+        b+=T(28,343,weeks[0]['date'],11,dim,font=MONO)+T(932,343,weeks[-1]['date'],11,dim,400,'end',MONO)
+    b+=T(480,366,'Weekly GitHub counts · linear height · latest week marked · six-hour refresh',12,dim,400,'middle')
+    write('activity',theme,385,'GitHub build history',f'{total} contributions over {len(weeks)} weeks. Updated {data["as_of"]}. Each channel represents an actual weekly count.',b,'.last{animation:last 3s ease-in-out infinite}@keyframes last{50%{opacity:.25}}')

@@ -3,7 +3,7 @@
 An original, self-contained SVG profile. The fictional night-shift lab is a visual narrative, not a photograph or live machine. Project motion represents conceptual processing; only the activity chart uses measured GitHub data.
 
 - README.md — accessible profile composition
-- assets/ — six SVG modules, two themes each; cinematic hero uses the same intentional dark film frame in both modes
+- assets/ — seven SVG modules, two themes each; cinematic hero uses the same intentional dark film frame in both modes
 - data/profile.json — project identity and source links
 - data/contributions.json — dated weekly activity snapshot
 - scripts/cinema.py — original SVG illustration and module generators

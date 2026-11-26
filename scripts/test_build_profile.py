@@ -24,7 +24,7 @@ class ProfileTests(unittest.TestCase):
                 for i,project in enumerate(profile['projects'],1): cinema.project(theme,project,i)
                 cinema.toolkit(theme);cinema.timeline(theme);cinema.activity(theme,data)
             files=list(pathlib.Path(d).glob('*.svg'))
-            self.assertEqual(len(files),12)
+            self.assertEqual(len(files),14)
             for f in files:
                 s=f.read_text();root=ET.fromstring(s)
                 self.assertEqual(root.attrib['role'],'img')
@@ -37,7 +37,7 @@ class ProfileTests(unittest.TestCase):
     def test_readme_assets(self):
         md=(p.ROOT/'README.md').read_text()
         refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
-        self.assertEqual(len(refs),12)
+        self.assertEqual(len(refs),14)
         for f in refs: ET.parse(p.ROOT/f)
         data=json.loads((p.DATA/'contributions.json').read_text())
         p.validate(data)
@@ -48,7 +48,7 @@ class ProfileTests(unittest.TestCase):
         with patch.object(p.urllib.request,'urlopen',return_value=BytesIO(b'{"errors":[{"message":"unavailable"}]}')):
             with self.assertRaises(ValueError): p.fetch('test')
     def test_motion(self):
-        for name in ('identity','verifai','atlox','toolchain','activity'):
+        for name in ('identity','verifai','atlox','cane','toolchain','journey','activity'):
             s=(p.ASSETS/f'{name}-dark.svg').read_text()
             self.assertIn('@keyframes',s)
             self.assertIn('animation:',s)

@@ -34,21 +34,32 @@ My next frontier is MLOps — reproducible training, model versioning, container
 
 [Source](https://github.com/Arunprasath-2717/VOILORACLE) · [Case study](https://arunprasath.me/work/atlox-ai) · [Application](https://veiloracle.vercel.app/)
 
-## 02 — Skills & engineering
+<a href="https://github.com/Arunprasath-2717/CANE">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/cane-dark.svg">
+    <img src="assets/cane-light.svg" width="100%" alt="CANE — context-aware notification engine: incoming messages, context and rules, notify, digest or mute.">
+  </picture>
+</a>
+
+**CANE (Context-Aware Notification Engine)** — prioritizes multimodal WhatsApp messages with deterministic scoring, per-user context and historical retrieval. Each routing decision includes an explanation and evidence IDs; external LLMs are not required for the core inference pipeline.
+
+[Source](https://github.com/Arunprasath-2717/CANE) · [Case study](https://arunprasath.me/work/cane)
+
+## 02 — Engineering toolchain
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/toolchain-dark.svg">
-  <img src="assets/toolchain-light.svg" width="100%" alt="Languages: Python, TypeScript, Java, JavaScript, C, C++, SQL. Backend: FastAPI, Flask, Node.js, REST, SQLAlchemy, JWT. Applied AI: PyTorch, Transformers, spaCy, scikit-learn, BM25, evaluation. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, Supabase. Delivery: Linux, Docker, Git, GitHub Actions, CI/CD, Pytest, Ruff, Mypy. Frontend: React, Next.js, Vite, HTML, CSS, WebSockets. Learning Kubernetes, Terraform, model registries, experiment tracking and observability.">
+  <img src="assets/toolchain-light.svg" width="100%" alt="Languages: Python, TypeScript, Java, JavaScript, C, C++, SQL. Backend: FastAPI, Flask, Node.js, REST, SQLAlchemy, JWT. Applied AI: PyTorch, Transformers, spaCy, scikit-learn, BM25, OpenCV, evaluation. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, Supabase. Delivery: Linux, Docker, Git, GitHub Actions, CI/CD, Pytest, Ruff, Mypy. Frontend: React, Next.js, Vite, HTML, CSS, WebSockets. Learning Kubernetes, Terraform, AWS, model registries, experiment tracking and observability.">
 </picture>
 
-## 03 — The journey
+## 03 — Engineering journey
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/journey-dark.svg">
   <img src="assets/journey-light.svg" width="100%" alt="B.E. Computer Science and Engineering at Sri Shakthi Institute, 2024–2028. Internships at Ascentz Technologies, Pluto Academy and Thiranex in 2025. Code Rush second place and Render Rush event lead in 2026.">
 </picture>
 
-## 04 — Development activity
+## 04 — Build history
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
