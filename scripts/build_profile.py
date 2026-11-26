@@ -44,5 +44,5 @@ def main():
     for theme in THEMES:
         cinema.activity(theme,data)
     if a.live: source.write_text(json.dumps(data,indent=2)+'\n')
-    print('Generated 14 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
+    print('Generated 13 SVGs;',sum(w['count'] for w in data['weeks']),'contributions')
 if __name__=='__main__':main()

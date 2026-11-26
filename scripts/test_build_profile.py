@@ -22,7 +22,7 @@ class ProfileTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d,patch.object(cinema,'OUT',pathlib.Path(d)),patch.object(spectrum,'OUT',pathlib.Path(d)):
             spectrum.build(data)
             for theme in cinema.THEMES:cinema.activity(theme,data)
-            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),14)
+            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),13)
             for f in files:
                 svg=f.read_text();root=ET.fromstring(svg)
                 self.assertEqual(root.attrib['role'],'img')
@@ -43,19 +43,14 @@ class ProfileTests(unittest.TestCase):
             s=(p.ASSETS/f'activity-{theme}.svg').read_text();self.assertEqual(len(re.findall(r'<title>Week of ',s)),len(data['weeks']))
             for w in data['weeks']:self.assertIn(f'Week of {w["date"]}: {w["count"]} contributions',s)
     def test_cinematic_assets(self):
-        svg=(p.ASSETS/'spectrum-hero.svg').read_text()
-        root=ET.fromstring(svg)
-        self.assertEqual(root.attrib['viewBox'],'0 0 960 350')
-        self.assertIn('prefers-reduced-motion',svg)
-        self.assertIn('@keyframes shine',svg)
-        self.assertNotIn('<image',svg)
-        self.assertNotIn('<script',svg)
-        self.assertLess(len(svg.encode()),500000)
-        data=json.loads((p.DATA/'contributions.json').read_text())
-        for w in data['weeks']:self.assertIn(f'Week of {w["date"]}: {w["count"]} contributions',svg)
-        self.assertEqual(len(re.findall(r'<title>Week of ',svg)),len(data['weeks']))
+        asset=(p.ASSETS/'daylight-landscape-hero.webp').read_bytes()
+        self.assertEqual(asset[:4],b'RIFF')
+        self.assertEqual(asset[8:12],b'WEBP')
+        self.assertEqual(int.from_bytes(asset[4:8],'little')+8,len(asset))
+        self.assertLess(len(asset),1000000)
+        self.assertIn('assets/daylight-landscape-hero.webp',(p.ROOT/'README.md').read_text())
     def test_motion(self):
-        for name in ('spectrum-hero.svg','spectrum-cane.svg','spectrum-verifai.svg','spectrum-atlox.svg'):
+        for name in ('spectrum-cane.svg','spectrum-verifai.svg','spectrum-atlox.svg'):
             svg=(p.ASSETS/name).read_text()
             self.assertIn('@keyframes',svg)
             self.assertIn('animation:',svg)

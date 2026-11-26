@@ -19,55 +19,6 @@ def surface(w,h,accent=CORAL):
 def blend(a,b,u):
  a=tuple(int(a[k:k+2],16) for k in (1,3,5));b=tuple(int(b[k:k+2],16) for k in (1,3,5))
  return '#'+''.join(f'{max(0,min(255,round(x+(y-x)*u))):02x}' for x,y in zip(a,b))
-def hero(data):
- # A folded spectral ribbon, sampled as a smooth ruled surface. Each strip has
- # a different material color; shading is determined by local surface curvature.
- # The art is fixed in space, with light moving over it rather than a camera zoom.
- b=surface(960,350,PEACH)
- b+='<defs><clipPath id="art"><rect x="422" y="4" width="536" height="245" rx="14"/></clipPath><linearGradient id="light"><stop stop-color="#fff9ed" stop-opacity="0"/><stop offset=".5" stop-color="#fff9ed" stop-opacity=".36"/><stop offset="1" stop-color="#fff9ed" stop-opacity="0"/></linearGradient></defs>'
- def pt(u,v):
-  theta=u*math.tau*.88-1.2
-  # Twisted ribbon orbit with a deliberately asymmetric profile.
-  x=716+165*math.cos(theta)+v*54*math.cos(theta*.5+1)
-  y=126+76*math.sin(theta)+v*44*math.sin(theta*.5+1)
-  return x,y
- strips=20;steps=72
- palette=[CORAL,'#ffc09a',CITRUS,'#fff4bf',MINT]
- # Draw strips from far end to near; path overlap creates a folded textile.
- ribbon=''
- for j in range(strips):
-  v0=-1+2*j/strips;v1=-1+2*(j+1)/strips
-  z=(j/(strips-1))*(len(palette)-1);k=min(int(z),len(palette)-2)
-  base=blend(palette[k],palette[k+1],z-k)
-  for i in range(steps):
-   u=i/steps;un=(i+1)/steps
-   shade=.70+.30*(.5+.5*math.sin(u*math.tau*1.7+j*.075))
-   col=blend('#41302d',base,shade)
-   ribbon+=polygon([pt(u,v0),pt(un,v0),pt(un,v1),pt(u,v1)],col,'stroke="'+col+'" stroke-width=".45"')
- # Continuous edge lines make the object crisp, not a scatterplot.
- for v in (-1,1):
-  d='M'+'L'.join(f'{x:.2f} {y:.2f}' for x,y in [pt(i/192,v) for i in range(193)])
-  ribbon+=p(d,'#fff5dc',.9,'opacity=".66"')
- # Light reflection is clipped exactly to the ribbon silhouette.
- outline=[pt(i/192,-1) for i in range(193)]+[pt(i/192,1) for i in range(192,-1,-1)]
- b+='<g clip-path="url(#art)"><g class="ribbon">'+ribbon+'<defs><clipPath id="silk">'+polygon(outline,'white')+'</clipPath></defs><g clip-path="url(#silk)">'+r(405,-25,100,340,'url(#light)','class="shine" transform="skewX(-12)"')+'</g></g></g>'
- b+=t(29,39,'AP / 2717',13,PEACH,700,font=MONO,extra='letter-spacing="3"')
- b+=t(27,110,'Arun Prasath',59,WHITE,700)
- b+=t(30,153,'Backend engineering',24,WHITE,500)
- b+=t(30,185,'Applied AI · MLOps',24,WHITE,500)
- b+=t(30,228,'Computer science student · India',15,DIM)
- b+=p('M30 255H930','#696262',.8,'opacity=".65"')
- weeks=data['weeks'];peak=max([x['count'] for x in weeks]+[1]);total=sum(x['count'] for x in weeks)
- b+=t(30,279,'BUILD RECORD',11,PEACH,700,font=MONO,extra='letter-spacing="1.7"')
- b+=t(30,316,str(total),33,WHITE,750,font=MONO)
- b+=t(136,310,'GitHub contributions',13,DIM)
- for i,w in enumerate(weeks):
-  x=335+i*11.15;n=w['count'];h=3+34*n/peak
-  col=blend('#555458',PEACH,.25+.75*n/peak) if n else '#4a4a50'
-  b+=f'<g><title>Week of {esc(w["date"])}: {n} contributions</title>'+r(round(x,2),round(316-h,2),7.5,round(h,2),col,'rx="2"')+'</g>'
- b+=t(930,338,data['as_of']+' UTC · weekly counts',10,DIM,400,'end',MONO)
- css='.ribbon{animation:ribbon 9s ease-in-out infinite;transform-origin:716px 126px}.shine{animation:shine 6s ease-in-out infinite}@keyframes ribbon{50%{transform:rotate(-3deg) translate(0,-4px)}}@keyframes shine{0%,15%{transform:translateX(-80px) skewX(-12deg);opacity:0}30%{opacity:.8}80%,100%{transform:translateX(550px) skewX(-12deg);opacity:0}}'
- svg('spectrum-hero.svg',960,350,'Arun Prasath','Original folded spectrum artwork. Backend engineering, applied AI and MLOps. The lower chart shows actual weekly GitHub counts.',b,css)
 def heading(num,name,tag,desc,stack,accent):
  b=t(27,32,num+' / '+tag,12,accent,700,font=MONO,extra='letter-spacing="1.3"')
  b+=t(25,79,name,40,WHITE,700)
@@ -137,4 +88,4 @@ def nav():
   b=r(1,1,180,34,'#28292e','rx="8" stroke="'+col+'" stroke-opacity=".45"')+t(12,23,label,14,col,600)+p('M156 12H168V24M168 12L156 24',col,1.4)
   svg('spectrum-action-'+slug+'.svg',182,36,label,label,b)
 def build(data):
- hero(data);verifai();atlox();cane();skills();nav()
+ verifai();atlox();cane();skills();nav()

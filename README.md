@@ -1,5 +1,5 @@
 <!-- AP/2717 — Spectrum. Original vector artwork and measured contribution data. -->
-<img src="assets/spectrum-hero.svg" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Original animated folded spectrum artwork with actual weekly GitHub contribution counts.">
+<img src="assets/daylight-landscape-hero.webp" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Computer science student in India. Sunlit mountain landscape with mist-filled valleys.">
 
 <div align="center">
   <a href="https://arunprasath.me"><img src="assets/spectrum-contact-portfolio.svg" width="49%" alt="Portfolio — projects and case studies"></a>
@@ -42,6 +42,6 @@ I'm a computer science student in India building Python backends and applied AI 
   <img src="assets/activity-dark.svg" width="100%" alt="GitHub contributions, active weeks and peak week.">
 </picture>
 
-<sub>Refreshed every six hours · [Weekly data](data/contributions.json) · [Snake generator](https://github.com/Platane/snk). The hero chart uses actual weekly counts. Project animations are illustrative; CANE counts are from its checked-in dataset.</sub>
+<sub>Refreshed every six hours · [Weekly data](data/contributions.json) · [Snake generator](https://github.com/Platane/snk). Project animations are illustrative; CANE counts are from its checked-in dataset.</sub>
 
 Open to backend, platform engineering and applied AI internships.
