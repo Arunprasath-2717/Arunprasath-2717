@@ -1,8 +1,5 @@
-<!-- AP/2717 • self-contained motion graphics and measured GitHub data -->
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/ruins-still.svg">
-  <img src="assets/ruins-hero.svg" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Floating mountain ruins with flowing waterfalls and drifting particles.">
-</picture>
+<!-- AP/2717 — Signal Foundry. Original vector artwork and measured contribution data. -->
+<img src="assets/foundry-hero.svg" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. An original animated silicon substrate with engraved weekly contribution channels.">
 
 <div align="center">
   <a href="https://arunprasath.me"><img src="assets/contact-portfolio.svg" width="49%" alt="Portfolio — projects and case studies"></a>
@@ -45,6 +42,6 @@ I'm a computer science student in India building Python backends and applied AI 
   <img src="assets/activity-dark.svg" width="100%" alt="GitHub contributions, active weeks and peak week.">
 </picture>
 
-<sub>Refreshed every six hours · [Weekly data](data/contributions.json) · [Snake generator](https://github.com/Platane/snk). Project animations are illustrative; CANE counts are from its checked-in dataset.</sub>
+<sub>Refreshed every six hours · [Weekly data](data/contributions.json) · [Snake generator](https://github.com/Platane/snk). The hero engravings use actual weekly counts. Project animations are illustrative; CANE counts are from its checked-in dataset.</sub>
 
 Open to backend, platform engineering and applied AI internships.

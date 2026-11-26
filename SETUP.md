@@ -1,15 +1,16 @@
-# Profile artwork and data
+# Signal Foundry — AP/2717
 
-The README uses a fixed-camera cinematic hero, an integrated skills scene, three selected projects, a visualization of CANE's checked-in predictions, and an authentic GitHub contribution snake.
+The public profile is assembled from original, self-contained SVGs. No external artwork or runtime JavaScript.
 
-- `scripts/ruins_hero.py`: cinematic artwork source; the hero is checked in.
-- `scripts/fieldwork.py`: project cards, contact and action tiles, skills scene, and CANE prediction distribution.
-- `scripts/cinema.py`: contribution totals.
-- `scripts/build_profile.py`: reproducible asset generation and GitHub data retrieval.
-- `data/cane-routing.json`: aggregate action counts from CANE's published output; not an accuracy metric.
-- `data/contributions.json`: weekly GitHub contribution counts.
+- scripts/foundry.py — animated silicon substrate with one engraved channel per actual GitHub calendar week; skill index.
+- scripts/fieldwork.py — project graphics, navigation and action tiles.
+- scripts/cinema.py — contribution summary.
+- scripts/build_profile.py — deterministic generation and GitHub GraphQL retrieval.
+- data/contributions.json — dated weekly counts.
+- data/cane-routing.json — aggregate checked-in CANE decisions, not accuracy.
+- .github/workflows/profile-telemetry.yml — validation and six-hour refresh, including Platane/snk.
 
-Run `python3 scripts/build_profile.py` to regenerate the thirteen generated SVGs.
-Run `python3 -m unittest discover -s scripts -p 'test_*.py'` to validate the assets.
-The scheduled workflow refreshes contribution data and the Platane/snk animation every six hours. GitHub API failures preserve the published snapshot.
-The project descriptions link to the original work; no simulated production screenshots are included.
+Run `python3 scripts/build_profile.py` to reproduce the fourteen generated SVGs.
+Run `python3 -m unittest discover -s scripts -p 'test_*.py'` to validate.
+The hero engravings reflect weekly contribution counts; the animated highlights and project graphics are illustrations, not live infrastructure.
+Reduced-motion CSS is included throughout. The original ruins artwork remains in Git history.

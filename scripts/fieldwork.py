@@ -1,7 +1,7 @@
 """Original, GitHub-safe motion cards. CrystalizedBall-inspired optics, no React/WebGL."""
 import base64, html, json, math, random, pathlib, xml.etree.ElementTree as ET
 ROOT=pathlib.Path(__file__).resolve().parents[1]; OUT=ROOT/'assets'
-BG='#191c20'; FG='#f3f1eb'; DIM='#bcc1c2'; GOLD='#e5c99a'; SAGE='#bfd5c7'; LINE='#3b4143'
+BG='#191c20'; FG='#f3f1eb'; DIM='#bcc1c2'; GOLD='#d7bd96'; SAGE='#c9c7bd'; LINE='#414143'
 FONT='Arial, Helvetica, sans-serif'; MONO='Consolas, Liberation Mono, monospace'
 def e(s):return html.escape(str(s),quote=True)
 def t(x,y,s,size,color=FG,weight=400,anchor='start',font=FONT,extra=''):
@@ -25,8 +25,8 @@ def heading(num,name,category,lines,stack):
 def crystal():
  b=shell(960,236)+heading('01','VerifAI','AI VERIFICATION',['Separate claims from supporting evidence.','Independent review with an explicit unknown state.'],'PYTHON / FASTAPI / POSTGRESQL / BM25')
  b+=c(736,113,133,'url(#ambient)')
- b+='<defs><radialGradient id="glass" cx=".34" cy=".27" r=".79"><stop stop-color="#d7e4da" stop-opacity=".25"/><stop offset=".44" stop-color="#5f716b" stop-opacity=".08"/><stop offset=".88" stop-color="#172220" stop-opacity=".25"/><stop offset="1" stop-color="#dbe5d3" stop-opacity=".57"/></radialGradient><clipPath id="crystal"><circle cx="736" cy="110" r="77"/></clipPath></defs>'
- b+=c(736,110,77,'url(#glass)','stroke="#b9d3c4" stroke-opacity=".72" stroke-width="1.4"')
+ b+='<defs><radialGradient id="glass" cx=".34" cy=".27" r=".79"><stop stop-color="#e6dac5" stop-opacity=".25"/><stop offset=".44" stop-color="#797267" stop-opacity=".08"/><stop offset=".88" stop-color="#232322" stop-opacity=".25"/><stop offset="1" stop-color="#e2d1b6" stop-opacity=".57"/></radialGradient><clipPath id="crystal"><circle cx="736" cy="110" r="77"/></clipPath></defs>'
+ b+=c(736,110,77,'url(#glass)','stroke="#cfc6b8" stroke-opacity=".72" stroke-width="1.4"')
  rng=random.Random(2717); dust=[]
  for i in range(330):
   ang=rng.random()*math.tau;rad=72*math.sqrt(rng.random());x=736+math.cos(ang)*rad;y=110+math.sin(ang)*rad
@@ -74,26 +74,14 @@ def cane():
 def contacts():
  icons=['M7 17L17 7M8 7H17V16','M5 9V19M5 5V6M10 19V9M10 13Q13 6 18 12V19','M14 4L6 12L14 20M8 12H20','M3 6H21V18H3ZM3 6L12 13L21 6']
  for i,(slug,title,detail) in enumerate([('portfolio','Portfolio','Projects & case studies'),('linkedin','LinkedIn','Professional profile'),('leetcode','LeetCode','Problem solving'),('email','Email','Get in touch')]):
-  b=shell(450,91,SAGE)+c(43,45,23,'#333b3b','stroke="#697771" stroke-opacity=".45"')
+  b=shell(450,91,SAGE)+c(43,45,23,'#353433','stroke="#77716a" stroke-opacity=".45"')
   b+=f'<g transform="translate(31 33)">{p(icons[i],SAGE,1.6,"stroke-linecap=\"round\" stroke-linejoin=\"round\"")}</g>'
   b+=t(79,37,title,22,FG,700)+t(80,61,detail,15,DIM)+p('M417 32L427 42L417 52',GOLD,1.6,'stroke-linecap="round"')
   write('contact-'+slug+'.svg',450,91,title,detail,b)
 def skills():
- plate=base64.b64encode((ROOT/'assets'/'river-landscape.webp').read_bytes()).decode()
- b=shell(960,500,SAGE)
- b+='<defs><linearGradient id="fade"><stop stop-color="#191c20"/><stop offset=".58" stop-color="#191c20" stop-opacity=".80"/><stop offset="1" stop-color="#191c20" stop-opacity=".03"/></linearGradient></defs>'
- b+=f'<g clip-path="url(#frame)"><image x="485" y="1" width="474" height="498" preserveAspectRatio="xMidYMid slice" xlink:href="data:image/webp;base64,{plate}"/>{r(485,1,474,498,"url(#fade)")}</g>'
- b+=t(28,39,'ENGINEERING TOOLKIT',12,GOLD,700,font=MONO,extra='letter-spacing="2"')+t(27,82,'From source to serving.',34,FG,700)
- rows=[('Languages','Python · Java · TypeScript · JavaScript · C/C++ · SQL'),('Backend','FastAPI · Flask · Node.js · REST · SQLAlchemy · JWT'),('Applied AI','PyTorch · Transformers · spaCy · scikit-learn · OpenCV'),('Data systems','PostgreSQL · PostGIS · Redis · SQLite · MongoDB · Supabase'),('Linux & delivery','Linux · Docker · Git · Actions · CI/CD · Pytest'),('Web & quality','React · Next.js · Vite · HTML/CSS · WebSockets · Ruff · Mypy')]
- for i,(label,detail) in enumerate(rows):
-  y=118+i*60
-  b+=t(28,y,f'{i+1:02}',12,SAGE,600,font=MONO)+t(64,y,label,19,FG,700)+t(64,y+23,detail,14,DIM)
-  if i<5:b+=p(f'M64 {y+37}H470',LINE)
- for i in range(24):
-  x=680+i*73%258;y=30+i*47%425
-  b+=c(x,y,1.2+(i%3)*.3,'#fff0cc',f'opacity=".55" class="twinkle" style="animation-delay:-{i*.43}s"')
- b+=t(929,470,'LINUX / CLOUD / ML',12,FG,700,'end',MONO)
- write('field-skills.svg',960,500,'Engineering toolkit','Six skill domains beside the cinematic ruins landscape.',b,CSS)
+ import foundry
+ foundry.OUT=OUT
+ foundry.skills()
 def actions():
  for slug,label in [('case','Case study'),('app','Application'),('data','Prediction data')]:
   b=r(1,1,182,36,'#22262a','rx="8" stroke="#525b5b"')+t(15,24,label,15,FG,600)+p('M157 13H169V25M169 13L157 25',SAGE,1.4,'stroke-linecap="round"')

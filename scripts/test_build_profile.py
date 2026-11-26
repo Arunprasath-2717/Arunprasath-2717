@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 import build_profile as p
 import cinema
 import fieldwork
+import foundry
 NS={'s':'http://www.w3.org/2000/svg'}
 XLINK='{http://www.w3.org/1999/xlink}href'
 class ProfileTests(unittest.TestCase):
@@ -19,10 +20,10 @@ class ProfileTests(unittest.TestCase):
             with self.assertRaises(ValueError):p.fetch('test')
     def test_render(self):
         profile=json.loads((p.DATA/'profile.json').read_text());data={'as_of':'2026-11-26','weeks':[{'date':'2026-11-15','count':0},{'date':'2026-11-22','count':9}]}
-        with tempfile.TemporaryDirectory() as d,patch.object(cinema,'OUT',pathlib.Path(d)),patch.object(fieldwork,'OUT',pathlib.Path(d)):
-            fieldwork.build()
+        with tempfile.TemporaryDirectory() as d,patch.object(cinema,'OUT',pathlib.Path(d)),patch.object(fieldwork,'OUT',pathlib.Path(d)),patch.object(foundry,'OUT',pathlib.Path(d)):
+            fieldwork.build();foundry.hero(data)
             for theme in cinema.THEMES:cinema.activity(theme,data)
-            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),13)
+            files=list(pathlib.Path(d).glob('*.svg'));self.assertEqual(len(files),14)
             for f in files:
                 svg=f.read_text();root=ET.fromstring(svg)
                 self.assertEqual(root.attrib['role'],'img')
@@ -32,7 +33,7 @@ class ProfileTests(unittest.TestCase):
             self.assertIn('Week of 2026-11-22: 9 contributions',(pathlib.Path(d)/'activity-dark.svg').read_text())
     def test_readme_assets(self):
         md=(p.ROOT/'README.md').read_text();refs=set(re.findall(r'(?:src|srcset)="(assets/[^"]+)"',md))
-        self.assertEqual(len(refs),17)
+        self.assertEqual(len(refs),16)
         for f in refs:
             self.assertTrue((p.ROOT/f).is_file(),f)
             if f.endswith(".svg"):ET.parse(p.ROOT/f)
@@ -43,16 +44,19 @@ class ProfileTests(unittest.TestCase):
             s=(p.ASSETS/f'activity-{theme}.svg').read_text();self.assertEqual(len(re.findall(r'<title>Week of ',s)),len(data['weeks']))
             for w in data['weeks']:self.assertIn(f'Week of {w["date"]}: {w["count"]} contributions',s)
     def test_cinematic_assets(self):
-        for name,plate,view,limit in [('ruins-hero.svg','ruins-landscape.webp','0 0 1600 640',1_000_000)]:
-            s=(p.ASSETS/name).read_text();root=ET.fromstring(s)
-            self.assertEqual(root.attrib['viewBox'],view);self.assertIn('prefers-reduced-motion',s);self.assertIn('@keyframes water',s);self.assertIn('@keyframes mote',s);self.assertNotIn('@keyframes camera',s);self.assertNotIn('<script',s);self.assertNotIn('foreignObject',s)
-            uris=[i.attrib[XLINK] for i in root.findall('.//s:image',NS)]
-            self.assertTrue(all(x.startswith('data:image/') for x in uris));self.assertIn((p.ASSETS/plate).read_bytes(),[base64.b64decode(x.split(',',1)[1]) for x in uris]);self.assertLess(len(s.encode()),limit)
-            self.assertTrue(root.findall('.//s:mask',NS))
-        self.assertNotIn('animation:',(p.ASSETS/'ruins-still.svg').read_text())
-        root=ET.parse(p.ASSETS/'ruins-hero.svg').getroot();name=[t for t in root.findall('.//s:text',NS) if t.text=='Arun Prasath'];self.assertEqual(len(name),1);self.assertEqual(name[0].attrib['text-anchor'],'middle')
+        svg=(p.ASSETS/'foundry-hero.svg').read_text()
+        root=ET.fromstring(svg)
+        self.assertEqual(root.attrib['viewBox'],'0 0 1200 460')
+        self.assertIn('prefers-reduced-motion',svg)
+        self.assertIn('@keyframes travel',svg)
+        self.assertNotIn('<image',svg)
+        self.assertNotIn('<script',svg)
+        self.assertLess(len(svg.encode()),100000)
+        data=json.loads((p.DATA/'contributions.json').read_text())
+        for w in data['weeks']:self.assertIn(f'Week of {w["date"]}: {w["count"]} contributions',svg)
+        self.assertEqual(len(re.findall(r'<title>Week of ',svg)),len(data['weeks']))
     def test_motion(self):
-        for name in ('field-skills.svg','field-cane.svg','project-verifai.svg','project-atlox.svg'):
+        for name in ('foundry-hero.svg','field-cane.svg','project-verifai.svg','project-atlox.svg'):
             svg=(p.ASSETS/name).read_text()
             self.assertIn('@keyframes',svg)
             self.assertIn('animation:',svg)
