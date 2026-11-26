@@ -1,16 +1,18 @@
-# AP/2717 profile source
+# AP/2717 — Night Shift
 
-- `README.md` — public profile, with accessible text and theme-aware artwork.
-- `data/profile.json` — curated identity and project summaries.
-- `data/contributions.json` — dated weekly contribution counts from GitHub.
-- `scripts/build_profile.py` — dependency-free Python SVG renderer and GraphQL client.
-- `scripts/test_build_profile.py` — XML, data, failure-handling and README-reference tests.
-- `assets/` — five original SVG modules in dark and light palettes.
-- `.github/workflows/profile-telemetry.yml` — read-only validation and scoped write refresh every six hours.
+An original, self-contained SVG profile. The fictional night-shift lab is a visual narrative, not a photograph or live machine. Project motion represents conceptual processing; only the activity chart uses measured GitHub data.
 
-Run `python3 scripts/build_profile.py` to reproduce artwork from checked-in data.
-Run `python3 -m unittest discover -s scripts -p 'test_*.py'` to validate it.
-For fresh contribution data, run `python3 scripts/build_profile.py --live` with
-`GH_TOKEN` supplied through the environment. Never commit credentials.
-API failure leaves the published snapshot untouched. Weekly bars are linear and
-annotated with actual counts. Animations describe system flow, not service status.
+- README.md — accessible profile composition
+- assets/ — six SVG modules, two themes each; cinematic hero uses the same intentional dark film frame in both modes
+- data/profile.json — project identity and source links
+- data/contributions.json — dated weekly activity snapshot
+- scripts/cinema.py — original SVG illustration and module generators
+- scripts/build_profile.py — local renderer entrypoint and GraphQL retrieval
+- scripts/test_build_profile.py — rendering, reference, motion and data validation
+- .github/workflows/profile-telemetry.yml — six-hour refresh, PR validation, and manual dispatch
+
+Run `python3 scripts/build_profile.py` to rebuild from the checked-in data.
+Run `python3 -m unittest discover -s scripts -p 'test_*.py'` to test.
+For fresh contribution data, pass `--live` with GH_TOKEN in the environment.
+API failure prevents publication and preserves the last good snapshot.
+The artwork uses system fonts, no external assets, no JavaScript and reduced-motion CSS.

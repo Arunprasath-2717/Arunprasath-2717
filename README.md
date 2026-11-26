@@ -1,72 +1,64 @@
-<!-- AP/2717 • Original, locally generated SVGs. No external stats providers. -->
+<!-- AP/2717 • Night Shift • Original SVG artwork, generated locally. -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/identity-dark.svg">
-  <img src="assets/identity-light.svg" width="100%" alt="Arun Prasath — Backend engineering, applied AI and MLOps. Computer science student in India.">
+  <img src="assets/identity-light.svg" width="100%" alt="Arun Prasath — backend engineering, applied AI and MLOps. An animated night-shift Linux workstation and server corridor.">
 </picture>
 
 [Portfolio](https://arunprasath.me) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/) · [LeetCode](https://leetcode.com/u/_Arun_Prasath_07_/) · [Email](mailto:arunprasath6035@gmail.com)
 
-I'm a CSE student at Sri Shakthi Institute, interested in the systems that sit between raw data and a useful decision. Most of my work uses Python and FastAPI, with NLP, retrieval or evaluation in the processing layer. I'm working toward MLOps: versioned models, reproducible builds, reliable APIs and deployments that can be inspected when they fail.
+I'm a CSE student working at the intersection of backend systems and applied machine learning. I like building the parts that turn unstructured input into something you can use, inspect and deploy: retrieval, processing pipelines, APIs and the infrastructure around them.
 
-## Selected work
+My next frontier is MLOps — reproducible training, model versioning, containerized serving and observability.
+
+## 01 — Selected systems
 
 <a href="https://github.com/Arunprasath-2717/VerifAI">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/verifai-dark.svg">
-    <img src="assets/verifai-light.svg" width="100%" alt="VerifAI — AI answer, claims, evidence, independent judges and verdict. Python, FastAPI, PostgreSQL and Pytest.">
+    <img src="assets/verifai-light.svg" width="100%" alt="VerifAI. Animated evidence review illustrating support, dispute and unknown verdicts.">
   </picture>
 </a>
 
-**VerifAI** separates what a language model said from what the available evidence supports. It compares model responses, extracts checkable claims and preserves a verification trail rather than treating agreement as truth.
-
-The architecture uses independent judges, an explicit unknown state and local BM25 retrieval as a fallback. The repository documents security controls and CI quality gates.
+**VerifAI** — compares AI answers, extracts checkable claims and traces verdicts to evidence. Independent judges and local BM25 retrieval help preserve uncertainty rather than confuse agreement with truth.
 
 [Source](https://github.com/Arunprasath-2717/VerifAI) · [Case study](https://arunprasath.me/work/verifai) · [Application](https://verifai-mauve.vercel.app/)
 
 <a href="https://github.com/Arunprasath-2717/VOILORACLE">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/atlox-dark.svg">
-    <img src="assets/atlox-light.svg" width="100%" alt="Atlox AI — news APIs and RSS feeds converge into a queue and NLP pipeline, producing events, sentiment and entities.">
+    <img src="assets/atlox-light.svg" width="100%" alt="Atlox AI. Animated streams from APIs and RSS through NLP into event clusters, entities and sentiment.">
   </picture>
 </a>
 
-**Atlox AI (VOILORACLE)** turns scattered news coverage into grouped events, searchable entities and sentiment signals. It uses multi-source ingestion, deduplication, NLP and event clustering.
-
-The engineering choice that matters here is density-based clustering: the number of events isn't known in advance. A Redis-backed queue separates ingestion from processing, with an in-memory fallback for local runs.
+**Atlox AI (VOILORACLE)** — aggregates news, deduplicates coverage and discovers events using NLP. Density-based clustering handles an unknown number of events; a Redis queue separates ingestion from processing, with an in-memory fallback for local runs.
 
 [Source](https://github.com/Arunprasath-2717/VOILORACLE) · [Case study](https://arunprasath.me/work/atlox-ai) · [Application](https://veiloracle.vercel.app/)
 
-## Engineering toolkit
+## 02 — Skills & engineering
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/toolchain-dark.svg">
-  <img src="assets/toolchain-light.svg" width="100%" alt="Backend: Python, FastAPI, SQLAlchemy, PostgreSQL, Redis and REST. Applied AI: PyTorch, Transformers, spaCy, scikit-learn, retrieval and evaluation. Delivery: Linux, Docker, Git, GitHub Actions, Pytest, Ruff and Mypy. Currently learning model versioning, Kubernetes, Terraform and observability.">
+  <img src="assets/toolchain-light.svg" width="100%" alt="Languages: Python, TypeScript, Java, JavaScript, C, C++, SQL. Backend: FastAPI, Flask, Node.js, REST, SQLAlchemy, JWT. Applied AI: PyTorch, Transformers, spaCy, scikit-learn, BM25, evaluation. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, Supabase. Delivery: Linux, Docker, Git, GitHub Actions, CI/CD, Pytest, Ruff, Mypy. Frontend: React, Next.js, Vite, HTML, CSS, WebSockets. Learning Kubernetes, Terraform, model registries, experiment tracking and observability.">
 </picture>
 
-**Current focus:** packaging ML workloads, model serving, experiment tracking and evaluation, container orchestration, infrastructure as code and production monitoring.
+## 03 — The journey
 
-## Experience & education
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/journey-dark.svg">
+  <img src="assets/journey-light.svg" width="100%" alt="B.E. Computer Science and Engineering at Sri Shakthi Institute, 2024–2028. Internships at Ascentz Technologies, Pluto Academy and Thiranex in 2025. Code Rush second place and Render Rush event lead in 2026.">
+</picture>
 
-| Year | Record |
-| :--- | :--- |
-| 2024–2028 | B.E. Computer Science & Engineering — Sri Shakthi Institute of Engineering and Technology |
-| 2025 | Full-stack web development internship — Ascentz Technologies |
-| 2025 | AI/ML internship — Pluto Academy |
-| 2025 | Full-stack web development internship — Thiranex |
-| 2026 | 2nd place, Code Rush — Kanam 2K26, NGP College |
-| 2026 | Event lead, Render Rush — Kalam 2026 |
-
-## Development activity
+## 04 — Development activity
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
-  <img src="assets/activity-light.svg" width="100%" alt="GitHub contribution record: weekly counts, total contributions, active weeks and peak week, generated from GitHub's contribution calendar.">
+  <img src="assets/activity-light.svg" width="100%" alt="GitHub contributions, active weeks, peak week and a chronological chart of actual weekly counts.">
 </picture>
 
-<sub>Contribution data is fetched from GitHub every six hours. The chart uses a linear scale, and the original weekly values are stored in <a href="data/contributions.json">the repository</a>. Project animations illustrate architecture, not live traffic.</sub>
+<sub>Updated from GitHub every six hours. <a href="data/contributions.json">Raw weekly data</a> · Artwork and project animations are illustrations, not live operational metrics.</sub>
 
 ---
 
-Open to software engineering internships in backend, platform engineering and applied AI.
+Open to software engineering internships in backend, platform and applied AI.
 
-[Explore all repositories](https://github.com/Arunprasath-2717?tab=repositories) · [Portfolio](https://arunprasath.me) · [Connect on LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/)
+[Portfolio](https://arunprasath.me) · [All repositories](https://github.com/Arunprasath-2717?tab=repositories) · [LinkedIn](https://www.linkedin.com/in/arun-prasath-p-6ar01333/)
