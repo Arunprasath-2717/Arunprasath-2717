@@ -43,12 +43,12 @@ class ProfileTests(unittest.TestCase):
             s=(p.ASSETS/f'activity-{theme}.svg').read_text();self.assertEqual(len(re.findall(r'<title>Week of ',s)),len(data['weeks']))
             for w in data['weeks']:self.assertIn(f'Week of {w["date"]}: {w["count"]} contributions',s)
     def test_cinematic_assets(self):
-        asset=(p.ASSETS/'daylight-landscape-hero.webp').read_bytes()
+        asset=(p.ASSETS/'reliable-systems-hero.webp').read_bytes()
         self.assertEqual(asset[:4],b'RIFF')
         self.assertEqual(asset[8:12],b'WEBP')
         self.assertEqual(int.from_bytes(asset[4:8],'little')+8,len(asset))
         self.assertLess(len(asset),1000000)
-        self.assertIn('assets/daylight-landscape-hero.webp',(p.ROOT/'README.md').read_text())
+        self.assertIn('assets/reliable-systems-hero.webp',(p.ROOT/'README.md').read_text())
     def test_motion(self):
         for name in ('spectrum-cane.svg','spectrum-verifai.svg','spectrum-atlox.svg'):
             svg=(p.ASSETS/name).read_text()

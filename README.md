@@ -1,5 +1,5 @@
 <!-- AP/2717 — Spectrum. Original vector artwork and measured contribution data. -->
-<img src="assets/daylight-landscape-hero.webp" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Computer science student in India. Sunlit mountain landscape with mist-filled valleys.">
+<img src="assets/reliable-systems-hero.webp" width="100%" alt="Arun Prasath — Backend engineering, Applied AI, MLOps. Computer science student in India. Building reliable systems.">
 
 <div align="center">
   <a href="https://arunprasath.me"><img src="assets/spectrum-contact-portfolio.svg" width="49%" alt="Portfolio — projects and case studies"></a>

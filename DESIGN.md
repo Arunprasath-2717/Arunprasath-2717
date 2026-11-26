@@ -2,7 +2,7 @@
 
 The visual language is bright coral, apricot, citrus and mint on neutral ink, with soft color falloff rather than solid accent backgrounds. GitHub's original green contribution snake remains unchanged.
 
-The hero is a high-resolution daylight landscape with centered, stationary typography. Project cards pair specific engineering decisions with distinct visuals: evidence highlighting, report clustering, and one tile per recorded CANE prediction. Skill labels stay static for readability.
+The hero is a high-resolution graphite, mint and amber composition with left-aligned typography and abstract layered system imagery. Project cards pair specific engineering decisions with distinct visuals: evidence highlighting, report clustering, and one tile per recorded CANE prediction. Skill labels stay static for readability.
 
 Reference review: https://github.com/PRABHUSIDDARTH/PRABHUSIDDARTH
 We studied its cohesive visual identity, compact project narratives, project-specific animation, skill presentation and scheduled contributions. No code, imagery, ASCII landscape, quest naming or layout assets were copied.
